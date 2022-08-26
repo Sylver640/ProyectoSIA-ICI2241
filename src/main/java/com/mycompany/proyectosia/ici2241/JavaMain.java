@@ -1,8 +1,9 @@
 package com.mycompany.proyectosia.ici2241;
 
-/**
- *
- * @author rodri
+/*
+ * Autores: Rodrigo Araos
+            Vicente Mercado
+            Nicolás Mery
  */
 public class JavaMain 
 {
