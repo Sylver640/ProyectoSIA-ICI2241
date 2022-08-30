@@ -5,7 +5,7 @@ import java.util.*;
 public class Cliente {
     private String nombre;
     private long telefono;
-    private int numPlanes;
+    //private int numPlanes;
     ArrayList<String> listaPlanes;
     
     public Cliente() {
@@ -16,20 +16,12 @@ public class Cliente {
         return nombre;
     }
 
-    public int getNumPlanes() {
-        return numPlanes;
-    }
-
     public long getTelefono() {
         return telefono;
     }
     
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public void setNumPlanes(int numPlanes) {
-        this.numPlanes = numPlanes;
     }
 
     public void setTelefono(long telefono) {

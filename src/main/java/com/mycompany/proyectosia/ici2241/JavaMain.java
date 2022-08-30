@@ -32,7 +32,10 @@ public class JavaMain
             System.out.println("-----MENÚ-----");
             System.out.println("1. Agregar nuevos planes");
             System.out.println("2. Planes disponibles");
-            System.out.println("3. Dispositivos disponibles");
+            System.out.println("3. Agregar plan a cliente");
+            System.out.println("4. Mostrar planes de cliente");
+            System.out.println("5. Dispositivos disponibles");
+            //4. Administrar clientes??
             System.out.println("0. Salir");
             System.out.println("--------------");
             System.out.println("Ingrese una opción: ");
@@ -46,6 +49,10 @@ public class JavaMain
                 case 2: System.out.println("MÉTODO NO IMPLEMENTADO");
                         break;
                 case 3: System.out.println("MÉTODO NO IMPLEMENTADO");
+                        break;
+                case 4: System.out.println("METODO NO IMPLEMENTADO");
+                        break;
+                case 5: System.out.println("METODO NO IMPLEMENTADO");
                         break;
                 case 0: break;
             }
