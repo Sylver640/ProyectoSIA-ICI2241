@@ -1,5 +1,6 @@
 package com.mycompany.proyectosia.ici2241;
-import java.util.HashMap;
+import java.util.*;
+import java.io.*;
 
 /*
  * Autores: Rodrigo Araos
@@ -8,7 +9,7 @@ import java.util.HashMap;
  */
 public class JavaMain 
 {
-    public static void main(String[] args) 
+    public static void main(String[] args) throws IOException 
     {
         /*La idea que tengo (hasta el momento, claro skdjksd) es la siguiente:
         
@@ -22,6 +23,32 @@ public class JavaMain
             c. Contratar un teléfono
             d. 
         */
+        BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
+        String ingresado;
+        int opt = 1;
         System.out.println("Esto es una prueba");
+        while (opt != 0)
+        {
+            System.out.println("-----MENÚ-----");
+            System.out.println("1. Agregar nuevos planes");
+            System.out.println("2. Planes disponibles");
+            System.out.println("3. Dispositivos disponibles");
+            System.out.println("0. Salir");
+            System.out.println("--------------");
+            System.out.println("Ingrese una opción: ");
+            ingresado = lector.readLine();
+            opt = Integer.parseInt(ingresado);
+            
+            switch(opt)
+            {
+                case 1: System.out.println("MÉTODO NO IMPLEMENTADO");
+                        break;
+                case 2: System.out.println("MÉTODO NO IMPLEMENTADO");
+                        break;
+                case 3: System.out.println("MÉTODO NO IMPLEMENTADO");
+                        break;
+                case 0: break;
+            }
+        }
     }
 }

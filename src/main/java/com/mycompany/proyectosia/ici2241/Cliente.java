@@ -1,5 +1,5 @@
 package com.mycompany.proyectosia.ici2241;
-import java.util.ArrayList;
+import java.util.*;
 
 
 public class Cliente {
@@ -9,7 +9,7 @@ public class Cliente {
     ArrayList<String> listaPlanes;
     
     public Cliente() {
-        
+        listaPlanes = new ArrayList();
     }
 
     public String getNombre() {
@@ -23,10 +23,6 @@ public class Cliente {
     public long getTelefono() {
         return telefono;
     }
-
-    public ArrayList<String> getListaPlanes() {
-        return listaPlanes;
-    }
     
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -39,8 +35,4 @@ public class Cliente {
     public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
-
-    public void setListaPlanes(ArrayList<String> listaPlanes) {
-        this.listaPlanes = listaPlanes;
-    }    
 }
