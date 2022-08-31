@@ -3,22 +3,27 @@ import java.util.*;
 
 
 public class Cliente {
+    //Variables de instancia
     private String nombre;
     private long telefono;
-    private Hashtable<String,Plan> listaPlanes;
+    private ArrayList<Plan> listaPlanes;
     
+    //Constructor que no recibe variables
     public Cliente() {
-        listaPlanes = new Hashtable();
+        listaPlanes = new ArrayList();
     }
 
+    //Getter para el nombre
     public String getNombre() {
         return nombre;
     }
-
+    
+    //Getter para el telefono del cliente
     public long getTelefono() {
         return telefono;
     }
     
+    //Setter para el nombre del cliente
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -27,23 +32,40 @@ public class Cliente {
         this.telefono = telefono;
     }
     
-    public void addPlan(Plan p, String nombre)
-    {
-        listaPlanes.put(nombre, p);
+    public void setTelefono(int telefono){
+        this.telefono = telefono;
     }
     
-    public void addPlan(String nombre, Plan p)
+    //Método que añade un plan a la lista del cliente
+    public boolean addPlan(Plan p)
     {
-        listaPlanes.put(nombre, p);
+        if (listaPlanes.contains(p) == false) //Como no está en la lista, tan solo se agrega
+        {
+            listaPlanes.add(p);
+            return true;
+        }
+        else
+            return false;
     }
     
-    public Plan getPlan(Plan p, String nombre)
+    //Método para buscar un plan del usuario
+    public Plan getPlan(String nombre)
     {
-        return listaPlanes.get(nombre);
-    }
-    
-    public Plan getPlan(String nombre, Plan p)
-    {
-        return listaPlanes.get(nombre);
+        if (listaPlanes.isEmpty() == true)
+            return null;
+        
+        int i = 0;
+        while (i < listaPlanes.size())
+        {
+            Plan planToGet = listaPlanes.get(i);
+            if (planToGet.getNombre().equals(nombre))
+            {
+                return planToGet;
+            }
+            else
+                i++;
+        }
+        
+        return null;
     }
 }

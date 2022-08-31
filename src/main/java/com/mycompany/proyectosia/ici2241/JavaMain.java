@@ -11,13 +11,13 @@ public class JavaMain
 {
     public static void main(String[] args) throws IOException 
     {
-        //Se presume que quien usarío esta aplicación es una empresa, por lo que no existe un inicio de sesión    
+        //Se presume que quien usarío esta aplicación es una empresa, por lo que no existe un inicio de sesión
+        //Variables de lectura
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
         String ingresado;
         int opt = 1;
         
-        //Hashtable <String, Smartphone> dispositivos = new Hashtable();
-        
+        //Creación del menú
         while (opt != 0)
         {
             System.out.println("-----MENÚ-----");
