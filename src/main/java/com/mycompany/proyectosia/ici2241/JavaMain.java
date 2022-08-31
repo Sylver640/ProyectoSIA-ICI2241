@@ -11,22 +11,13 @@ public class JavaMain
 {
     public static void main(String[] args) throws IOException 
     {
-        /*La idea que tengo (hasta el momento, claro skdjksd) es la siguiente:
-        
-        1. Una lista (o mapa??) que contenga todos los planes. Esta se va a cargar con un csv o txt que se va a abrir
-        apenas empiece el programa.
-        2. El cliente deberá iniciar sesión. Así se cargan sus datos, y al mismo tiempo el de todos los demás guardándose en
-        sus respectivos objetos de clase "Cliente".
-        3. Un menú que tenga las siguientes opciones:
-            a. Planes disponibles para contratar
-            b. Manejar mis planes
-            c. Contratar un teléfono
-            d. 
-        */
+        //Se presume que quien usarío esta aplicación es una empresa, por lo que no existe un inicio de sesión    
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
         String ingresado;
         int opt = 1;
-        System.out.println("Esto es una prueba");
+        
+        //Hashtable <String, Smartphone> dispositivos = new Hashtable();
+        
         while (opt != 0)
         {
             System.out.println("-----MENÚ-----");

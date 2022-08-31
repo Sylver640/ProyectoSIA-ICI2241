@@ -1,13 +1,13 @@
 package com.mycompany.proyectosia.ici2241;
 
-public class DispositivoMovil {
-    private String nombreEquipo;
+public class Smartphone {
+    private String nombre;
     private int ram;
     private int memoria;
     private int precio;
     private int pulgadas;
     
-    public DispositivoMovil(){
+    public Smartphone(){
         
     }
 
@@ -15,8 +15,8 @@ public class DispositivoMovil {
         return memoria;
     }
 
-    public String getNombreEquipo() {
-        return nombreEquipo;
+    public String getNombre() {
+        return nombre;
     }
 
     public int getPrecio() {
@@ -34,9 +34,13 @@ public class DispositivoMovil {
     public void setMemoria(int memoria) {
         this.memoria = memoria;
     }
+    
+    public void setMemoria(double memoria) {
+        this.memoria = (int) memoria;
+    }
 
-    public void setNombreEquipo(String nombreEquipo) {
-        this.nombreEquipo = nombreEquipo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public void setPrecio(int precio) {
@@ -45,6 +49,14 @@ public class DispositivoMovil {
 
     public void setPulgadas(int pulgadas) {
         this.pulgadas = pulgadas;
+    }
+    
+    public void setPulgadas(long pulgadas) {
+        this.pulgadas = (int) pulgadas;
+    }
+    
+    public void setPulgadas(double pulgadas) {
+        this.pulgadas = (int) pulgadas;
     }
 
     public void setRam(int ram) {
