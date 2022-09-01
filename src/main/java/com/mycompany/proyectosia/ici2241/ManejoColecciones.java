@@ -8,6 +8,8 @@ public class ManejoColecciones
 {
     //Mapa que contiene todos los planes disponibles en el mercado
     private Hashtable <String,Plan> planesMap = new Hashtable();
+    //Mapa que contiene los clientes
+    private Hashtable <String,Cliente> clientesMap = new Hashtable();
     
     //Constructor
     public ManejoColecciones()
@@ -19,6 +21,12 @@ public class ManejoColecciones
     public Hashtable getPlanes()
     {
         return planesMap;
+    }
+    
+    //Se obtiene todo el mapa de clientes
+    public Hashtable getClientes()
+    {
+        return clientesMap;
     }
     
     //Método para añadir un nuevo plan al mapa
@@ -35,6 +43,44 @@ public class ManejoColecciones
         if (planesMap.contains(nombre) == false)
         {
             planesMap.put(nombre, toAdd);
+        }
+    }
+    
+    public void addCliente(Cliente toAdd)
+    {
+        String rut = toAdd.getRut();
+        
+        if (clientesMap.isEmpty() == true)
+        {
+            clientesMap.put(rut, toAdd);
+            return;
+        }
+        
+        if (clientesMap.contains(rut) == false)
+        {
+            clientesMap.put(rut, toAdd);
+        }
+    }
+    
+    //Método para la lectura del archivo clientes.csv ubicado en la raíz del programa
+    public void importClientes() throws FileNotFoundException, IOException
+    {
+        CSV clientesCSV = new CSV("clientes");
+        String linea = clientesCSV.firstLine();
+        Cliente toAdd = new Cliente(clientesCSV, linea);
+        this.addCliente(toAdd);
+        
+        while (true)
+        {
+            linea = null;
+            linea = clientesCSV.nextLine();
+            if (linea.equals("") || linea == null)
+            {
+                break;
+            }
+            
+            toAdd = new Cliente(clientesCSV, linea);
+            this.addCliente(toAdd);
         }
     }
     
@@ -84,7 +130,7 @@ public class ManejoColecciones
         dataPlan = read.readLine();
         minutes = Integer.parseInt(dataPlan);
         
-        Plan agregarPlan = new Plan(namePlan,price,mbs,minutes);
-        addPlan(agregarPlan);        
+        Plan newPlan = new Plan(namePlan,price,mbs,minutes);
+        addPlan(newPlan);        
     }
 }

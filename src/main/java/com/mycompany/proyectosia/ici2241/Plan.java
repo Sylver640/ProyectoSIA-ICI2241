@@ -3,21 +3,21 @@ package com.mycompany.proyectosia.ici2241;
 public class Plan {
     //Variables de instancia
     private String nombre;
-    private int precio;
-    private int minutos;
-    private int megas;
-    
-    //Constructor de Plan que recibe datos ingresados por usuario.
-    public Plan(String nombrePlan, long precio, int megas, int minutos){
-        this.setNombre(nombrePlan);
-        this.setPrecio(precio);
-        this.setMinutos(minutos);
-        this.setMegas(megas);
-    }
+    private long precio;
+    private long minutos;
+    private long megas;
     
     //Constructor de Plan sin variables recibidas
     public Plan(){
         
+    }
+    
+    //Constructor de Plan que recibe datos ingresados por usuario.
+    public Plan(String nombrePlan, long precio, long megas, long minutos){
+        this.setNombre(nombrePlan);
+        this.setPrecio(precio);
+        this.setMinutos(minutos);
+        this.setMegas(megas);
     }
     
     //Constructor de Plan que recibe datos desde un archivo CSV
@@ -35,47 +35,44 @@ public class Plan {
         return nombre;
     }
 
-    public int getMegas() {
+    public long getMegas() {
         return megas;
     }
 
-    public int getMinutos() {
+    public long getMinutos() {
         return minutos;
     }
 
-    public int getPrecio() {
+    public long getPrecio() {
         return precio;
     }
     
-    public void setNombre(String nombre)
-    {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setMegas(int megas) {
+    public void setMegas(long megas) {
         this.megas = megas;
     }
 
-    public void setMinutos(int minutos) {
+    public void setMinutos(long minutos) {
         this.minutos = minutos;
+    }
+    
+    public void setPrecio(long precio) {
+        this.precio = precio;
     }
     
     //Sobrecarga en variables double
     public void setMinutos(double minutos) {
-        this.minutos = (int) minutos;
-    }
-    
-    public void setPrecio(int precio) {
-        this.precio = precio;
+        this.minutos = (long) minutos;
     } 
     
-    //Sobrecarga en variables double
     public void setPrecio(double precio) {
-        this.precio = (int)precio;
+        this.precio = (long) precio;
     }
     
-    //Sobrecarga en variables long
-    public void setPrecio(long precio) {
-        this.precio = (int)precio;
+    public void setMegas(double megas) {
+        this.megas = (long) megas;
     }
 }
