@@ -59,4 +59,32 @@ public class ManejoColecciones
             this.addPlan(toAdd);
         }
     }
+    
+    //Método para crear un nuevo plan a partir de la opción 1 en el menú.
+    public void addManualPlan() throws IOException{ 
+        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+        String dataPlan;
+        String namePlan;
+        long price;
+        int minutes;
+        int mbs;
+        System.out.println("Por favor inserte el nombre de su plan: ");
+        dataPlan = read.readLine();
+        namePlan = dataPlan;
+        
+        System.out.println("Por favor inserte el precio de su plan: ");
+        dataPlan = read.readLine();
+        price = Integer.parseInt(dataPlan);
+        
+        System.out.println("Por favor inserte la cantidad de megas en su plan: ");
+        dataPlan = read.readLine();
+        mbs = Integer.parseInt(dataPlan);
+        
+        System.out.println("Por favor inserte la cantidad de minutos en su plan: ");
+        dataPlan = read.readLine();
+        minutes = Integer.parseInt(dataPlan);
+        
+        Plan agregarPlan = new Plan(namePlan,price,mbs,minutes);
+        addPlan(agregarPlan);        
+    }
 }

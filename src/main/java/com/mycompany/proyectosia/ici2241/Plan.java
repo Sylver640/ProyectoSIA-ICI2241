@@ -7,6 +7,14 @@ public class Plan {
     private int minutos;
     private int megas;
     
+    //Constructor de Plan que recibe datos ingresados por usuario.
+    public Plan(String nombrePlan, long precio, int megas, int minutos){
+        this.setNombre(nombrePlan);
+        this.setPrecio(precio);
+        this.setMinutos(minutos);
+        this.setMegas(megas);
+    }
+    
     //Constructor de Plan sin variables recibidas
     public Plan(){
         
@@ -63,6 +71,11 @@ public class Plan {
     
     //Sobrecarga en variables double
     public void setPrecio(double precio) {
+        this.precio = (int)precio;
+    }
+    
+    //Sobrecarga en variables long
+    public void setPrecio(long precio) {
         this.precio = (int)precio;
     }
 }

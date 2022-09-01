@@ -16,6 +16,7 @@ public class JavaMain
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
         String ingresado;
         int opt = 1;
+        ManejoColecciones colHandle = new ManejoColecciones();
         
         //Creación del menú
         while (opt != 0)
@@ -35,7 +36,7 @@ public class JavaMain
             
             switch(opt)
             {
-                case 1: System.out.println("MÉTODO NO IMPLEMENTADO");
+                case 1: colHandle.addManualPlan();
                         break;
                 case 2: System.out.println("MÉTODO NO IMPLEMENTADO");
                         break;
