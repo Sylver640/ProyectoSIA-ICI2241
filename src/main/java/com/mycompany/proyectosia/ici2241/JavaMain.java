@@ -17,8 +17,7 @@ public class JavaMain
         int opt = 1;
         ManejoColecciones colHandle = new ManejoColecciones();
         
-        //Primero se podrían importar los planes, y después los clientes. Así al momento de hacer esto último
-        //los planes ya existirían y bastaría con buscarlos en el mapa, y agregar estos a la lista de cada cliente.
+        //Primero se podrían importar los planes, y después los clientes.
         
         //Creación del menú
         while (opt != 0)
@@ -26,10 +25,10 @@ public class JavaMain
             System.out.println("-----MENÚ-----");
             System.out.println("1. Agregar nuevos planes");
             System.out.println("2. Planes disponibles");
-            System.out.println("3. Agregar plan a cliente");
-            System.out.println("4. Mostrar planes de cliente");
+            System.out.println("3. Agregar plan a un cliente");
+            System.out.println("4. Mostrar planes contratados de un cliente");
             System.out.println("5. Dispositivos disponibles");
-            //Opción: Administrar clientes??
+            //Opción: Administrar telefonos de un cliente
             System.out.println("0. Salir");
             System.out.println("--------------");
             System.out.println("Ingrese una opción: ");

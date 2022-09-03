@@ -5,31 +5,25 @@ public class Cliente {
     //Variables de instancia
     private String rut;
     private String nombre;
-    private long telefono;
+    //clase telefono con 3 atributos, uno para el numero, otro para el plan, y otro para el dispositivo
     //Podrían haber más variables
-    private ArrayList<Plan> listaPlanes;
+    private HashMap<String, Telefono> listaTelefonos;
     
     //Constructor que no recibe variables
     public Cliente() {
-        listaPlanes = new ArrayList();
+        this.listaTelefonos = new HashMap<String, Telefono>();
     }
     
     public Cliente(CSV clientes, String linea)
     {
         this.setNombre(clientes.get_csvField(linea, 0));
-        this.setTelefono(Integer.parseInt(clientes.get_csvField(linea, 1)));
+        this.setRut(clientes.get_csvField(linea,1));
         //aquí tendría que ver cómo hacerlos con los planes
     }
     
-
     //Getter para el nombre
     public String getNombre() {
         return nombre;
-    }
-    
-    //Getter para el telefono del cliente
-    public long getTelefono() {
-        return telefono;
     }
 
     public String getRut() {
@@ -41,48 +35,52 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public void setTelefono(long telefono) {
-        this.telefono = telefono;
-    }
-    
-    public void setTelefono(double telefono){
-        this.telefono = (long) telefono;
-    }
-
     public void setRut(String rut) {
         this.rut = rut;
     }
     
     //Método que añade un plan a la lista del cliente
-    public boolean addPlan(Plan p)
+    //Se requiere que el cliente tenga al menos el telefono creado
+    public boolean addPlan(Plan toAdd, String telefono)
     {
-        if (listaPlanes.contains(p) == false) //Como no está en la lista, tan solo se agrega
+        if (listaTelefonos.containsKey(telefono))
         {
-            listaPlanes.add(p);
+            Telefono search = listaTelefonos.get(telefono);
+            search.setPlan(toAdd);
             return true;
         }
         else
+        {
             return false;
+        }
     }
     
     //Método para buscar un plan del usuario
     public Plan getPlan(String nombre)
     {
-        if (listaPlanes.isEmpty() == true)
+        if (listaTelefonos.isEmpty() == true)
             return null;
         
-        int i = 0;
-        while (i < listaPlanes.size())
+        for (Telefono iterator: listaTelefonos.values())
         {
-            Plan planToGet = listaPlanes.get(i);
-            if (planToGet.getNombre().equals(nombre))
-            {
-                return planToGet;
-            }
-            else
-                i++;
+            if (iterator.getPlan().getNombre().equals(nombre))
+                return iterator.getPlan();
         }
         
         return null;
+    }
+    
+    public void mostrarPlanes()
+    {
+        if (listaTelefonos.isEmpty() == true)
+        {
+            System.out.println("Este cliente no tiene planes contratados");
+            return;
+        }
+                    
+        for(Telefono iterator: listaTelefonos.values()) 
+        {
+            System.out.println(iterator.getPlan().getNombre());
+        }
     }
 }

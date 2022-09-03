@@ -7,26 +7,14 @@ import java.io.*;
 public class ManejoColecciones 
 {
     //Mapa que contiene todos los planes disponibles en el mercado
-    private Hashtable <String,Plan> planesMap = new Hashtable();
+    private HashMap <String,Plan> planesMap = new HashMap<String,Plan>();
     //Mapa que contiene los clientes
-    private Hashtable <String,Cliente> clientesMap = new Hashtable();
+    private HashMap <String,Cliente> clientesMap = new HashMap<String,Cliente>();
     
     //Constructor
     public ManejoColecciones()
     {
     
-    }
-    
-    //Se obtiene todo el mapa de planes
-    public Hashtable getPlanes()
-    {
-        return planesMap;
-    }
-    
-    //Se obtiene todo el mapa de clientes
-    public Hashtable getClientes()
-    {
-        return clientesMap;
     }
     
     //Método para añadir un nuevo plan al mapa
@@ -40,7 +28,7 @@ public class ManejoColecciones
             return;
         }
         
-        if (planesMap.contains(nombre) == false)
+        if (planesMap.containsKey(nombre) == false)
         {
             planesMap.put(nombre, toAdd);
         }
@@ -56,7 +44,7 @@ public class ManejoColecciones
             return;
         }
         
-        if (clientesMap.contains(rut) == false)
+        if (clientesMap.containsKey(rut) == false)
         {
             clientesMap.put(rut, toAdd);
         }

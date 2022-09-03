@@ -1,13 +1,13 @@
 package com.mycompany.proyectosia.ici2241;
 
-public class Smartphone {
+public class Dispositivo {
     private String nombre;
     private int ram;
     private int memoria;
     private int precio;
     private int pulgadas;
     
-    public Smartphone(){
+    public Dispositivo(){
         
     }
 
