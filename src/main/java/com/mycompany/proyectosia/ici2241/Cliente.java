@@ -55,6 +55,20 @@ public class Cliente {
         }
     }
     
+    public boolean addPlan(String telefono, Plan toAdd)
+    {
+        if (listaTelefonos.containsKey(telefono))
+        {
+            Telefono search = listaTelefonos.get(telefono);
+            search.setPlan(toAdd);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
     //Método para buscar un plan del usuario
     public Plan getPlan(String nombre)
     {
