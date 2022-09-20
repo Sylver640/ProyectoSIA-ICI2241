@@ -25,6 +25,12 @@ public class Cliente {
     public String getNombre() {
         return nombre;
     }
+    
+    //Getter para un telefono especificado.
+    public Telefono getFono(String telefono){
+        Telefono fonoTele = listaTelefonos.get(telefono);
+        return fonoTele;
+    }
 
     public String getRut() {
         return rut;

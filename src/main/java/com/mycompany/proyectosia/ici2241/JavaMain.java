@@ -17,6 +17,7 @@ public class JavaMain
         int opt = 1;
         ManejoColecciones colHandle = new ManejoColecciones();
         
+        
         //Primero se podrían importar los planes, y después los clientes.
         
         //Creación del menú
@@ -41,9 +42,9 @@ public class JavaMain
                         break;
                 case 2: System.out.println("MÉTODO NO IMPLEMENTADO");
                         break;
-                case 3: System.out.println("MÉTODO NO IMPLEMENTADO");
+                case 3: colHandle.addClientPlan();
                         break;
-                case 4: System.out.println("METODO NO IMPLEMENTADO");
+                case 4: colHandle.showClientPlans();
                         break;
                 case 5: System.out.println("METODO NO IMPLEMENTADO");
                         break;
