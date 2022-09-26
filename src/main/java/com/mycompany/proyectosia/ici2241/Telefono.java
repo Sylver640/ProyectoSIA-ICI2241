@@ -1,7 +1,8 @@
 package com.mycompany.proyectosia.ici2241;
 
 /*
- @author rodri
+ @author Vicente Mercado
+ @author Rodrigo Araos
  */
 public class Telefono {
     private String numero;
