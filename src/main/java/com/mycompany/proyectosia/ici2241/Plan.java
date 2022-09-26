@@ -1,8 +1,7 @@
 package com.mycompany.proyectosia.ici2241;
 
-public class Plan {
+public class Plan extends Tarifa{
     //Variables de instancia
-    private String nombre;
     private long precio;
     private long minutos;
     private long megas;
@@ -13,8 +12,9 @@ public class Plan {
     }
     
     //Constructor de Plan que recibe datos ingresados por usuario.
-    public Plan(String nombrePlan, long precio, long megas, long minutos){
+    public Plan(String nombrePlan, String tipo, long precio, long megas, long minutos){
         this.setNombre(nombrePlan);
+        this.setTipo(tipo);
         this.setPrecio(precio);
         this.setMinutos(minutos);
         this.setMegas(megas);
@@ -31,48 +31,59 @@ public class Plan {
     
     //Getters y setters de cada variable de instancia
     
-    public String getNombre(){
-        return nombre;
-    }
-
-    public long getMegas() {
-        return megas;
-    }
-
-    public long getMinutos() {
-        return minutos;
-    }
-
-    public long getPrecio() {
-        return precio;
+    @Override
+    public String getNombre() {
+        return super.getNombre(); //To change body of generated methods, choose Tools | Templates.
     }
     
+    @Override
     public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setMegas(long megas) {
-        this.megas = megas;
-    }
-
-    public void setMinutos(long minutos) {
-        this.minutos = minutos;
+        super.setNombre(nombre); //To change body of generated methods, choose Tools | Templates.
     }
     
+    @Override
+    public String getTipo() {
+        return super.getTipo(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setTipo(String tipo) {
+        super.setTipo(tipo); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public void setPrecio(long precio) {
         this.precio = precio;
     }
-    
-    //Sobrecarga en variables double
-    public void setMinutos(double minutos) {
-        this.minutos = (long) minutos;
-    } 
     
     public void setPrecio(double precio) {
         this.precio = (long) precio;
     }
     
+    public long getPrecio() {
+        return precio;
+    }
+    
+    public void setMinutos(long minutos) {
+        this.minutos = minutos;
+    }
+    
+    public void setMinutos(double minutos) {
+        this.minutos = (long) minutos;
+    }
+    
+    public long getMinutos() {
+        return minutos;
+    }
+    
+    public void setMegas(long megas) {
+        this.megas = megas;
+    }
+    
     public void setMegas(double megas) {
         this.megas = (long) megas;
+    }
+    
+    public long getMegas() {
+        return megas;
     }
 }

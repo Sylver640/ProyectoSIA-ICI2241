@@ -1,8 +1,5 @@
 package com.mycompany.proyectosia.ici2241;
 
-/*
- @author rodri
- */
 public class Telefono {
     private String numero;
     private Dispositivo device;

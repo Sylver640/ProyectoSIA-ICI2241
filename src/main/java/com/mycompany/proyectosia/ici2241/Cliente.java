@@ -5,19 +5,20 @@ public class Cliente {
     //Variables de instancia
     private String rut;
     private String nombre;
-    //clase telefono con 3 atributos, uno para el numero, otro para el plan, y otro para el dispositivo
-    //Podrían haber más variables
+    //lista de teléfonos vinculados al usuario
     private HashMap<String, Telefono> listaTelefonos;
+    private int tiempoEnMeses;
     
     //Constructor que no recibe variables
     public Cliente() {
         this.listaTelefonos = new HashMap<String, Telefono>();
     }
     
+    //Constructor a base de un archivo CSV
     public Cliente(CSV clientes, String linea)
     {
-        this.setNombre(clientes.get_csvField(linea, 0));
-        this.setRut(clientes.get_csvField(linea,1));
+        this.setRut(clientes.get_csvField(linea,0));
+        this.setNombre(clientes.get_csvField(linea, 1));
         //aquí tendría que ver cómo hacerlos con los planes
     }
     
@@ -35,6 +36,10 @@ public class Cliente {
     public String getRut() {
         return rut;
     }
+
+    public int getTiempoEnMeses() {
+        return tiempoEnMeses;
+    }
     
     //Setter para el nombre del cliente
     public void setNombre(String nombre) {
@@ -43,6 +48,10 @@ public class Cliente {
 
     public void setRut(String rut) {
         this.rut = rut;
+    }
+
+    public void setTiempoEnMeses(int tiempoEnMeses) {
+        this.tiempoEnMeses = tiempoEnMeses;
     }
     
     //Método que añade un plan a la lista del cliente
@@ -56,9 +65,7 @@ public class Cliente {
             return true;
         }
         else
-        {
             return false;
-        }
     }
     
     public boolean addPlan(String telefono, Plan toAdd)

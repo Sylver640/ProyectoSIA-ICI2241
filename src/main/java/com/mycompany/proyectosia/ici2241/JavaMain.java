@@ -4,7 +4,6 @@ import java.io.*;
 /*
  * Autores: Rodrigo Araos
             Vicente Mercado
-            Nicolás Mery
  */
 public class JavaMain 
 {
@@ -16,9 +15,8 @@ public class JavaMain
         String ingresado;
         int opt = 1;
         ManejoColecciones colHandle = new ManejoColecciones();
-        
-        
-        //Primero se podrían importar los planes, y después los clientes.
+        colHandle.importDispositivos();
+        colHandle.importClientes();
         
         //Creación del menú
         while (opt != 0)
@@ -28,8 +26,7 @@ public class JavaMain
             System.out.println("2. Planes disponibles");
             System.out.println("3. Agregar plan a un cliente");
             System.out.println("4. Mostrar planes contratados de un cliente");
-            System.out.println("5. Dispositivos disponibles");
-            //Opción: Administrar telefonos de un cliente
+            System.out.println("5. Catálogo de dispositivos");
             System.out.println("0. Salir");
             System.out.println("--------------");
             System.out.println("Ingrese una opción: ");
@@ -46,7 +43,7 @@ public class JavaMain
                         break;
                 case 4: colHandle.showClientPlans();
                         break;
-                case 5: System.out.println("METODO NO IMPLEMENTADO");
+                case 5: colHandle.mostrarDispositivos();
                         break;
                 case 0: break;
             }

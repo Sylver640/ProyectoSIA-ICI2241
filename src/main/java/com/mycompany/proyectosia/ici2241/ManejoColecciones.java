@@ -1,15 +1,15 @@
 package com.mycompany.proyectosia.ici2241;
 import java.util.*;
 import java.io.*;
-/*
- @author rodri
- */
+
 public class ManejoColecciones 
 {
     //Mapa que contiene todos los planes disponibles en el mercado
     private HashMap <String,Plan> planesMap = new HashMap<String,Plan>();
+    private HashMap <String,Prepago> prepagoMap = new HashMap<String,Prepago>();
     //Mapa que contiene los clientes
     private HashMap <String,Cliente> clientesMap = new HashMap<String,Cliente>();
+    private HashMap <String,Dispositivo> celuMap = new HashMap<String,Dispositivo>();
     
     //Constructor
     public ManejoColecciones()
@@ -89,19 +89,35 @@ public class ManejoColecciones
         }
     }
     
+    public void addDispositivo(Dispositivo toAdd){
+        String nombre = toAdd.getNombre();
+        
+        if (celuMap.isEmpty() == true){
+            celuMap.put(nombre, toAdd);
+            return;
+        }
+        
+        if (celuMap.containsKey(nombre) == false){
+            celuMap.put(nombre, toAdd);
+        }
+    }
+    
     //Método para la lectura del archivo clientes.csv ubicado en la raíz del programa
     public void importClientes() throws FileNotFoundException, IOException
     {
         CSV clientesCSV = new CSV("clientes");
         String linea = clientesCSV.firstLine();
+        
         Cliente toAdd = new Cliente(clientesCSV, linea);
+        
         this.addCliente(toAdd);
         
         while (true)
         {
+            System.out.println(linea);
             linea = null;
             linea = clientesCSV.nextLine();
-            if (linea.equals("") || linea == null)
+            if (linea == null)
             {
                 break;
             }
@@ -133,11 +149,29 @@ public class ManejoColecciones
         }
     }
     
+    public void importDispositivos() throws FileNotFoundException, IOException {
+        CSV dispositivosCSV = new CSV("dispositivos");
+        String linea = dispositivosCSV.firstLine();
+        Dispositivo toAdd = new Dispositivo(dispositivosCSV, linea);
+        
+        this.addDispositivo(toAdd);
+        
+        while (true){
+            linea = null;
+            linea = dispositivosCSV.nextLine();
+            if (linea == null)
+                break;
+            
+            toAdd = new Dispositivo(dispositivosCSV, linea);
+            this.addDispositivo(toAdd);
+        }
+    }
+    
     //Método para mostrar los planes de un cliente en específico.
     public void showClientPlans() throws IOException{
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         String clientName;
-        System.out.println("Por favor, inserte el nombre del plan a agregar al cliente: ");
+        System.out.println("Ingrese el RUT del cliente: ");
         clientName = read.readLine();
         Cliente searched = clientesMap.get(clientName);
         
@@ -147,7 +181,49 @@ public class ManejoColecciones
             System.out.println("Lo sentimos, el cliente buscado no existe");
             return;
         }
+    }
+    
+    public void mostrarDispositivos() throws IOException{
+        if (celuMap.isEmpty()){
+            System.out.println("No existen dispositivos para mostrar");
+            return;
+        }
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Ingrese una opción:");
+        System.out.println("(1) Ver todos los dispositivos disponibles");
+        System.out.println("(2) Filtrar por marca");
+        String opt = reader.readLine();
         
+        if (opt.equals("1")){
+            System.out.println("----------------------");
+            for (Dispositivo iterator: celuMap.values()){
+                System.out.println("Nombre: "+ iterator.getNombre());
+                System.out.println("Marca: "+ iterator.getMarca());
+                System.out.println("Precio: $" + iterator.getPrecio());
+                System.out.println("Memoria RAM: " + iterator.getRam() + " GB");
+                System.out.println("Espacio: " + iterator.getMemoria() + " GB");
+                System.out.println("Pantalla de " + iterator.getPulgadas() + " pulgadas");
+                System.out.println("Soporta conexión de hasta " + iterator.getConexion());
+                System.out.println("\n");
+            }
+            System.out.println("----------------------");
+        }
+        
+        if (opt.equals("2")){
+            System.out.println("Ingrese qué marca de celular desea ver: ");
+            String filtrarMarca = reader.readLine();
+            for (Dispositivo iterator: celuMap.values()){
+                if (iterator.getMarca().equals(filtrarMarca)){
+                    System.out.println("Nombre: "+ iterator.getNombre());
+                    System.out.println("Precio: $" + iterator.getPrecio());
+                    System.out.println("Memoria RAM: " + iterator.getRam() + " GB");
+                    System.out.println("Espacio: " + iterator.getMemoria() + " GB");
+                    System.out.println("Pantalla de " + iterator.getPulgadas() + " pulgadas");
+                    System.out.println("Soporta conexión de hasta " + iterator.getConexion());
+                    System.out.println("\n");
+                }
+            }
+        }
     }
     
     //Método para crear un nuevo plan a partir de la opción 1 en el menú.
@@ -174,7 +250,7 @@ public class ManejoColecciones
         dataPlan = read.readLine();
         minutes = Integer.parseInt(dataPlan);
         
-        Plan newPlan = new Plan(namePlan,price,mbs,minutes);
+        Plan newPlan = new Plan(namePlan,"Postpago",price,mbs,minutes);
         addNewPlan(newPlan);        
     }
 }
