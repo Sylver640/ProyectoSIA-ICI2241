@@ -1,5 +1,8 @@
 package com.mycompany.proyectosia.ici2241;
-
+/*
+ @author Vicente Mercado
+ @author Rodrigo Araos
+ */
 public class Telefono {
     private String numero;
     private Dispositivo device;
