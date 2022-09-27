@@ -54,6 +54,10 @@ public class Cliente {
         this.tiempoEnMeses = tiempoEnMeses;
     }
     
+    public void setTiempoEnMeses(double tiempoEnMeses){
+        this.tiempoEnMeses = (int) tiempoEnMeses;
+    }
+    
     //Método que añade un plan a la lista del cliente
     //Se requiere que el cliente tenga al menos el telefono creado
     public boolean addPlan(Plan toAdd, String telefono)
@@ -99,9 +103,13 @@ public class Cliente {
     
     public void mostrarPlanes()
     {
-        if (listaTelefonos.isEmpty() == true)
-        {
-            System.out.println("Este cliente no tiene planes contratados");
+        try{
+            if (listaTelefonos.isEmpty() == true){
+                System.out.println("Este cliente no tiene ningún teléfono");
+                return;
+            }
+        }catch(NullPointerException e){
+            System.out.println("Este cliente no tiene ningún teléfono");
             return;
         }
                     

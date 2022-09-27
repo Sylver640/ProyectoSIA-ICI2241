@@ -5,6 +5,7 @@ public class Plan extends Tarifa{
     private long precio;
     private long minutos;
     private long megas;
+    private int SMS;
     
     //Constructor de Plan sin variables recibidas
     public Plan(){
@@ -18,15 +19,18 @@ public class Plan extends Tarifa{
         this.setPrecio(precio);
         this.setMinutos(minutos);
         this.setMegas(megas);
+        this.setSMS(SMS);
     }
     
     //Constructor de Plan que recibe datos desde un archivo CSV
     public Plan(CSV planes, String linea)
     {
         this.setNombre(planes.get_csvField(linea, 0));
-        this.setPrecio(Integer.parseInt(planes.get_csvField(linea, 1)));
-        this.setMinutos(Integer.parseInt(planes.get_csvField(linea, 2)));
-        this.setMegas(Integer.parseInt(planes.get_csvField(linea, 3)));
+        this.setTipo(planes.get_csvField(linea,1));
+        this.setPrecio(Integer.parseInt(planes.get_csvField(linea, 2)));
+        this.setMinutos(Integer.parseInt(planes.get_csvField(linea, 3)));
+        this.setMegas(Integer.parseInt(planes.get_csvField(linea, 4)));
+        this.setSMS(Integer.parseInt(planes.get_csvField(linea, 5)));
     }
     
     //Getters y setters de cada variable de instancia
@@ -85,5 +89,13 @@ public class Plan extends Tarifa{
     
     public long getMegas() {
         return megas;
+    }
+
+    public void setSMS(int SMS) {
+        this.SMS = SMS;
+    }
+
+    public int getSMS() {
+        return SMS;
     }
 }
