@@ -7,6 +7,7 @@ public class Telefono {
     private String numero;
     private Dispositivo device;
     private Plan plan;
+    private Prepago prepago;
     
     public Telefono(){
         
@@ -36,4 +37,11 @@ public class Telefono {
         this.plan = plan;
     }
 
+    public Prepago getPrepago() {
+        return prepago;
+    }
+
+    public void setPrepago(Prepago prepago) {
+        this.prepago = prepago;
+    }
 }

@@ -15,11 +15,12 @@ public class Cliente {
     }
     
     //Constructor a base de un archivo CSV
-    public Cliente(CSV clientes, String linea)
+    public Cliente(CSV cliente, String linea)
     {
-        this.setRut(clientes.get_csvField(linea,0));
-        this.setNombre(clientes.get_csvField(linea, 1));
-        //aquí tendría que ver cómo hacerlos con los planes
+        this.setRut(cliente.get_csvField(linea,0));
+        this.setNombre(cliente.get_csvField(linea, 1));
+        this.setTiempoEnMeses(Integer.parseInt(cliente.get_csvField(linea, 2)));
+        this.listaTelefonos = new HashMap<String, Telefono>();
     }
     
     //Getter para el nombre
@@ -56,6 +57,10 @@ public class Cliente {
     
     public void setTiempoEnMeses(double tiempoEnMeses){
         this.tiempoEnMeses = (int) tiempoEnMeses;
+    }
+    
+    public void addTelefono(Telefono toAdd, String numero){
+        listaTelefonos.put(numero, toAdd);
     }
     
     //Método que añade un plan a la lista del cliente
@@ -115,7 +120,8 @@ public class Cliente {
                     
         for(Telefono iterator: listaTelefonos.values()) 
         {
-            System.out.println(iterator.getPlan().getNombre());
+            if (iterator.getPlan() != null)
+                System.out.println(iterator.getPlan().getNombre());
         }
     }
 }

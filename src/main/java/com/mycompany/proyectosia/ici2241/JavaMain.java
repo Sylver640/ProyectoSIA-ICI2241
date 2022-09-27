@@ -15,6 +15,8 @@ public class JavaMain
         String ingresado;
         int opt = 1;
         ManejoColecciones colHandle = new ManejoColecciones();
+        colHandle.importPlanes();
+        colHandle.importPrepago();
         colHandle.importDispositivos();
         colHandle.importClientes();
         
@@ -22,7 +24,7 @@ public class JavaMain
         while (opt != 0)
         {
             System.out.println("-----MENÚ-----");
-            System.out.println("1. Agregar nuevos planes");
+            System.out.println("1. Mostrar información de clientes");
             System.out.println("2. Planes disponibles");
             System.out.println("3. Agregar plan a un cliente");
             System.out.println("4. Mostrar planes contratados de un cliente");

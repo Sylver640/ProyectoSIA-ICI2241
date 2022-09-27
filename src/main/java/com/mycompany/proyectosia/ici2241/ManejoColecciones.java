@@ -6,15 +6,38 @@ public class ManejoColecciones
 {
     //Mapa que contiene todos los planes disponibles en el mercado
     private HashMap <String,Plan> planesMap = new HashMap<String,Plan>();
+    //Mapa que contiene cada número único que es prepago
     private HashMap <String,Prepago> prepagoMap = new HashMap<String,Prepago>();
     //Mapa que contiene los clientes
     private HashMap <String,Cliente> clientesMap = new HashMap<String,Cliente>();
+    //Mapa con todos los dispositivos disponibles
     private HashMap <String,Dispositivo> celuMap = new HashMap<String,Dispositivo>();
     
     //Constructor
     public ManejoColecciones()
     {
     
+    }
+    
+    public Plan getPlan(String nombre){
+        if (planesMap.containsKey(nombre)){
+            return planesMap.get(nombre);
+        }
+        return null;
+    }
+    
+    public Dispositivo getDevice(String nombre){
+        if (celuMap.containsKey(nombre)){
+            return celuMap.get(nombre);
+        }
+        return null;
+    }
+    
+    public Prepago getPrepago(String telefono){
+        if (prepagoMap.containsKey(telefono)){
+            return prepagoMap.get(telefono);
+        }
+        return null;
     }
     
     //Método para añadir un nuevo plan al mapa
@@ -31,6 +54,19 @@ public class ManejoColecciones
         if (planesMap.containsKey(nombre) == false)
         {
             planesMap.put(nombre, toAdd);
+        }
+    }
+    
+    public void addPrepago (Prepago toAdd){
+        String numeroVinculado = toAdd.getNombre();
+        
+        if (prepagoMap.isEmpty() == true){
+            prepagoMap.put(numeroVinculado, toAdd);
+            return;
+        }
+        
+        if (prepagoMap.containsKey(numeroVinculado) == false){
+            prepagoMap.put(numeroVinculado, toAdd);
         }
     }
     
@@ -77,12 +113,6 @@ public class ManejoColecciones
     {
         String rut = toAdd.getRut();
         
-        if (clientesMap.isEmpty() == true)
-        {
-            clientesMap.put(rut, toAdd);
-            return;
-        }
-        
         if (clientesMap.containsKey(rut) == false)
         {
             clientesMap.put(rut, toAdd);
@@ -102,6 +132,33 @@ public class ManejoColecciones
         }
     }
     
+    //Método para cargar los teléfonos de un cliente por medio del CSV
+    public void cargarTelefonosCliente(String telefonos, String tarifas, String dispositivos, Cliente c){
+        //Se divide cada string en tokens para 
+        StringTokenizer fonoToken = new StringTokenizer (telefonos,",");
+        StringTokenizer tarifaToken = new StringTokenizer (tarifas,",");
+        StringTokenizer celuToken = new StringTokenizer (dispositivos,",");
+        
+        while (fonoToken.hasMoreTokens()){
+            String actualNum = fonoToken.nextToken();
+            String actualTarifa = tarifaToken.nextToken();
+            String actualDevice = celuToken.nextToken();
+            
+            Telefono toAdd = new Telefono();
+            
+            toAdd.setNumero(actualNum);
+            if (tarifaToken.equals("Prepago")){
+                toAdd.setPrepago(this.getPrepago(actualNum));
+            } else{
+                toAdd.setPlan(this.getPlan(actualTarifa));
+            }
+            
+            toAdd.setDevice(this.getDevice(actualDevice));
+            
+            c.addTelefono(toAdd, actualNum);
+        }
+    }
+    
     //Método para la lectura del archivo clientes.csv ubicado en la raíz del programa
     public void importClientes() throws FileNotFoundException, IOException
     {
@@ -109,12 +166,15 @@ public class ManejoColecciones
         String linea = clientesCSV.firstLine();
         
         Cliente toAdd = new Cliente(clientesCSV, linea);
+        this.cargarTelefonosCliente(clientesCSV.get_csvField(linea, 3).substring(1, clientesCSV.get_csvField(linea, 3).length()-1), 
+                                    clientesCSV.get_csvField(linea, 4).substring(1, clientesCSV.get_csvField(linea, 4).length()-1), 
+                                    clientesCSV.get_csvField(linea, 5).substring(1, clientesCSV.get_csvField(linea, 5).length()-1),
+                                    toAdd);
         
         this.addCliente(toAdd);
         
         while (true)
         {
-            System.out.println(linea);
             linea = null;
             linea = clientesCSV.nextLine();
             if (linea == null)
@@ -123,6 +183,10 @@ public class ManejoColecciones
             }
             
             toAdd = new Cliente(clientesCSV, linea);
+            this.cargarTelefonosCliente(clientesCSV.get_csvField(linea, 3).substring(1, clientesCSV.get_csvField(linea, 3).length()-1), 
+                                        clientesCSV.get_csvField(linea, 4).substring(1, clientesCSV.get_csvField(linea, 4).length()-1), 
+                                        clientesCSV.get_csvField(linea, 5).substring(1, clientesCSV.get_csvField(linea, 5).length()-1),
+                                        toAdd);
             this.addCliente(toAdd);
         }
     }
@@ -139,13 +203,31 @@ public class ManejoColecciones
         {
             linea = null;
             linea = planesCSV.nextLine();
-            if (linea.equals("") || linea == null)
+            if (linea == null)
             {
                 break;
             }
             
             toAdd = new Plan(planesCSV, linea);
             this.addNewPlan(toAdd);
+        }
+    }
+    
+    public void importPrepago() throws FileNotFoundException, IOException{
+        CSV prepagoCSV = new CSV("prepagos");
+        String linea = prepagoCSV.firstLine();
+        Prepago toAdd = new Prepago(prepagoCSV, linea);
+        this.addPrepago(toAdd);
+        
+        while (true){
+            linea = null;
+            linea = prepagoCSV.nextLine();
+            if (linea == null){
+                break;
+            }
+            
+            toAdd = new Prepago(prepagoCSV, linea);
+            this.addPrepago(toAdd);
         }
     }
     
@@ -182,6 +264,7 @@ public class ManejoColecciones
             return;
         }
     }
+    
     
     public void mostrarDispositivos() throws IOException{
         if (celuMap.isEmpty()){
@@ -227,7 +310,7 @@ public class ManejoColecciones
     }
     
     //Método para crear un nuevo plan a partir de la opción 1 en el menú.
-    public void addManualPlan() throws IOException{ 
+    /*public void addManualPlan() throws IOException{ 
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         String dataPlan;
         String namePlan;
@@ -252,5 +335,5 @@ public class ManejoColecciones
         
         Plan newPlan = new Plan(namePlan,"Postpago",price,mbs,minutes);
         addNewPlan(newPlan);        
-    }
+    }*/
 }

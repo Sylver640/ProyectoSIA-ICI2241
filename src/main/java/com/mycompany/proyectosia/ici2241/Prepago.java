@@ -8,6 +8,14 @@ public class Prepago extends Tarifa{
     public Prepago(){
         
     }
+    
+    public Prepago (CSV prepago, String linea){
+        this.setNombre(prepago.get_csvField(linea, 0));
+        this.setTipo(prepago.get_csvField(linea, 1));
+        this.setSaldoActual(Integer.parseInt(prepago.get_csvField(linea, 2)));
+        this.setCostoMinutos(Integer.parseInt(prepago.get_csvField(linea, 3)));
+        this.setCostoSMS(Integer.parseInt(prepago.get_csvField(linea, 4)));
+    }
 
     @Override
     public void setNombre(String nombre) {
