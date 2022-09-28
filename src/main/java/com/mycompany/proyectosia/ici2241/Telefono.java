@@ -12,6 +12,20 @@ public class Telefono {
     public Telefono(){
         
     }
+    
+    public Telefono(String numero, Dispositivo device, Plan plan){
+        this.setNumero(numero);
+        this.setDevice(device);
+        this.setPlan(plan);
+        this.setPrepago(null);
+    }
+    
+    public Telefono(String numero, Dispositivo device, Prepago prepago){
+        this.setNumero(numero);
+        this.setDevice(device);
+        this.setPlan(null);
+        this.setPrepago(prepago);
+    }
 
     public Dispositivo getDevice() {
         return device;

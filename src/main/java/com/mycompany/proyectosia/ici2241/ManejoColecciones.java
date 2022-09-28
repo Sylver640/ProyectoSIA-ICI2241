@@ -96,7 +96,7 @@ public class ManejoColecciones
                 System.out.println("Por favor, inserte el teléfono del cliente en donde el plan tomará acción: ");
                 Ingr = read.readLine();
                 
-                if(searched.getFono(Ingr) != null){
+                if(searched.getTelefono(Ingr) != null){
                     searched.addPlan(toAdd, Ingr);
                     
                 }else{
@@ -149,14 +149,12 @@ public class ManejoColecciones
         while (fonoToken.hasMoreTokens()){
             String actualNum = fonoToken.nextToken();
             String actualTarifa = tarifaToken.nextToken();
-            System.out.println(actualTarifa);
             String actualDevice = celuToken.nextToken();
             
             Telefono toAdd = new Telefono();
             
             toAdd.setNumero(actualNum);
             if (actualTarifa.equals("Prepago")){
-                System.out.println("se agrega prepago");
                 toAdd.setPrepago(this.getPrepago(actualNum));
             } else{
                 toAdd.setPlan(this.getPlan(actualTarifa));
@@ -304,7 +302,7 @@ public class ManejoColecciones
                           Cliente c = getCliente(toShow);
                           if (c != null){
                               c.mostrarDatos("a");
-                              System.out.println("Desea ver los datos del algún teléfono? (s/n)");
+                              System.out.println("Desea ver los datos de algún teléfono? (s/n)");
                               String fonoData = reader.readLine();
                               if (fonoData.equals("s")){
                                   System.out.println("Ingrese el número: ");
@@ -372,6 +370,20 @@ public class ManejoColecciones
         }
     }
     
+    public Prepago agregarNuevoPrepago(String telefono) throws IOException{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Ingrese el saldo del teléfono:");
+        long saldo = (Integer.parseInt(reader.readLine()));
+        System.out.println("Ingrese el costo de cada minuto:");
+        long costoM = (Integer.parseInt(reader.readLine()));
+        System.out.println("Ingrese el costo de cada mensaje:");
+        long costoS = (Integer.parseInt(reader.readLine()));
+        
+        Prepago p = new Prepago(telefono,"Prepago",saldo,costoM,costoS);
+        this.addPrepago(p);
+        return p;
+    }
+    
     public void editarContratos() throws IOException{
         if (clientesMap.isEmpty()){
             System.out.println("No existen clientes para editar!");
@@ -387,8 +399,69 @@ public class ManejoColecciones
             System.out.println("Cliente no encontrado");
             return;
         }
+        System.out.println("\n");
+        c.mostrarDatos(0);
+        String opt = "";
         
         
+        while (!opt.equals("0")){
+            System.out.println("Qué desea realizar?");
+            System.out.println("(1) Agregar un nuevo contrato");
+            System.out.println("(2) Eliminar un contrato existente");
+            System.out.println("(3) Editar un contrato");
+            System.out.println("(0) Volver");
+            opt = reader.readLine();
+            
+            switch(opt){
+                case "1": System.out.println("Ingrese el nuevo número:");
+                          String toAdd = reader.readLine();
+                          System.out.println("Qué tipo de tarifa contiene el nuevo contrato? (Plan / Prepago)");
+                          String toAddTarifa = reader.readLine();
+                          System.out.println("Qué dispositivo celular tendrá este contrato? Ingrese el nombre del modelo:");
+                          String toAddDispositivo = reader.readLine();
+                          Dispositivo d = this.getDevice(toAddDispositivo);
+                          
+                          if (d == null){
+                              System.out.println("Dispositivo no se encuentra en el catálogo");
+                              break;
+                          }
+                          
+                          if (toAddTarifa.equals("Prepago")){
+                              Prepago toAddPrepago = this.agregarNuevoPrepago(toAdd);
+                              c.crearNuevoContrato(toAdd, toAddPrepago, d);
+                              System.out.println("Contrato agregado correctamente");
+                              break;
+                          }
+                          
+                          if (toAddTarifa.equals("Plan")){
+                              System.out.println("Qué plan tendrá este contrato?");
+                              String toAddPlan = reader.readLine();
+                              if (this.getPlan(toAddPlan) == null){
+                                  System.out.println("Plan indicado no existe");
+                                  break;
+                              }
+                              
+                              c.crearNuevoContrato(toAdd, this.getPlan(toAddPlan), d);
+                              System.out.println("Contrato agregado correctamente");
+                              
+                              break;
+                          }
+                          
+                          System.out.println("Tipo de tarifa no válida");
+                          break;
+                          
+                case "2": System.out.println("Indique el número del contrato que desea eliminar:");
+                          String toDelete = reader.readLine();
+                          if (c.eliminarTelefono(toDelete)){
+                              System.out.println("Teléfono eliminado correctamente");
+                              break;
+                          }
+                          System.out.println("El cliente "+c.getRut()+" no tiene este teléfono contratado");
+                          break;
+                          
+                case "3": break;
+            }
+        }
     }
     //Método para crear un nuevo plan a partir de la opción 1 en el menú.
     /*public void addManualPlan() throws IOException{ 

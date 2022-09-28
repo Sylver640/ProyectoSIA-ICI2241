@@ -29,7 +29,7 @@ public class Cliente {
     }
     
     //Getter para un telefono especificado.
-    public Telefono getFono(String telefono){
+    public Telefono getTelefono(String telefono){
         Telefono fonoTele = listaTelefonos.get(telefono);
         return fonoTele;
     }
@@ -106,6 +106,15 @@ public class Cliente {
         return null;
     }
     
+    public boolean eliminarTelefono(String telefono){
+        Telefono t = this.getTelefono(telefono);
+        if (t == null){
+            return false;
+        }
+        listaTelefonos.remove(telefono);
+        return true;
+    }
+    
     public void mostrarPlanes()
     {
         try{
@@ -163,5 +172,15 @@ public class Cliente {
         }
         
         System.out.println("Dispositivo contratado: "+t.getDevice().getNombre());
+    }
+    
+    public void crearNuevoContrato(String telefono, Plan p, Dispositivo d){
+        Telefono nuevo = new Telefono(telefono, d, p);
+        this.addTelefono(nuevo, telefono);
+    }
+    
+    public void crearNuevoContrato(String telefono, Prepago p, Dispositivo d){
+        Telefono nuevo = new Telefono(telefono, d, p);
+        this.addTelefono(nuevo, telefono);
     }
 }
