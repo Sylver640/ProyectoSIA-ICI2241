@@ -44,4 +44,13 @@ public class Telefono {
     public void setPrepago(Prepago prepago) {
         this.prepago = prepago;
     }
+    
+    public boolean isPlan(){
+        if (this.getPlan() == null){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
 }

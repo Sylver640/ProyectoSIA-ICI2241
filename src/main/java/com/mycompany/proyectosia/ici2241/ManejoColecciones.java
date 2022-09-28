@@ -19,6 +19,13 @@ public class ManejoColecciones
     
     }
     
+    public Cliente getCliente(String rut){
+        if (clientesMap.containsKey(rut)){
+            return clientesMap.get(rut);
+        }
+        return null;
+    }
+    
     public Plan getPlan(String nombre){
         if (planesMap.containsKey(nombre)){
             return planesMap.get(nombre);
@@ -142,12 +149,14 @@ public class ManejoColecciones
         while (fonoToken.hasMoreTokens()){
             String actualNum = fonoToken.nextToken();
             String actualTarifa = tarifaToken.nextToken();
+            System.out.println(actualTarifa);
             String actualDevice = celuToken.nextToken();
             
             Telefono toAdd = new Telefono();
             
             toAdd.setNumero(actualNum);
-            if (tarifaToken.equals("Prepago")){
+            if (actualTarifa.equals("Prepago")){
+                System.out.println("se agrega prepago");
                 toAdd.setPrepago(this.getPrepago(actualNum));
             } else{
                 toAdd.setPlan(this.getPlan(actualTarifa));
@@ -265,6 +274,56 @@ public class ManejoColecciones
         }
     }
     
+    public void mostrarInfoClientes() throws IOException{
+        if (clientesMap.isEmpty()){
+            System.out.println("No se encontraron clientes");
+            return;
+        }
+        
+        BufferedReader reader = new BufferedReader (new InputStreamReader (System.in));
+        
+        String opt = "";
+        
+        while (!opt.equals("0")){
+            System.out.println("Ingrese una opción:");
+            System.out.println("(1) Mostrar datos de todos los clientes");
+            System.out.println("(2) Mostrar información de un cliente");
+            System.out.println("(0) Volver al menú principal");
+            opt = reader.readLine();
+            
+            switch (opt){
+                case "1": System.out.println("----------------------");
+                          for (Cliente iterator: clientesMap.values()){
+                              System.out.println("Nombre de cliente: "+iterator.getNombre());
+                              System.out.println("RUT del cliente: "+iterator.getRut());
+                              System.out.println("Tiempo que lleva el cliente en la compañía: "+iterator.getTiempoEnMeses());
+                              System.out.println("\n");
+                          }
+                          System.out.println("----------------------");
+                          break;
+                case "2": System.out.println("Ingrese el RUT del cliente: ");
+                          String toShow = reader.readLine();
+                          Cliente c = getCliente(toShow);
+                          if (c != null){
+                              c.mostrarDatos();
+                              System.out.println("Desea ver los datos del algún teléfono? (s/n)");
+                              String fonoData = reader.readLine();
+                              if (fonoData.equals("s")){
+                                  System.out.println("Ingrese el número: ");
+                                  fonoData = reader.readLine();
+                                  c.mostrarDatosTelefono(fonoData);
+                              }
+                              System.out.println("----------------------\n");
+                          }
+                          else{
+                              System.out.println("El cliente ingresado no existe\n");
+                          }
+                          break;
+                          
+            }
+        }
+    }
+    
     
     public void mostrarDispositivos() throws IOException{
         if (celuMap.isEmpty()){
@@ -272,40 +331,46 @@ public class ManejoColecciones
             return;
         }
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Ingrese una opción:");
-        System.out.println("(1) Ver todos los dispositivos disponibles");
-        System.out.println("(2) Filtrar por marca");
-        String opt = reader.readLine();
         
-        if (opt.equals("1")){
-            System.out.println("----------------------");
-            for (Dispositivo iterator: celuMap.values()){
-                System.out.println("Nombre: "+ iterator.getNombre());
-                System.out.println("Marca: "+ iterator.getMarca());
-                System.out.println("Precio: $" + iterator.getPrecio());
-                System.out.println("Memoria RAM: " + iterator.getRam() + " GB");
-                System.out.println("Espacio: " + iterator.getMemoria() + " GB");
-                System.out.println("Pantalla de " + iterator.getPulgadas() + " pulgadas");
-                System.out.println("Soporta conexión de hasta " + iterator.getConexion());
-                System.out.println("\n");
-            }
-            System.out.println("----------------------");
-        }
+        String opt = "";
         
-        if (opt.equals("2")){
-            System.out.println("Ingrese qué marca de celular desea ver: ");
-            String filtrarMarca = reader.readLine();
-            for (Dispositivo iterator: celuMap.values()){
-                if (iterator.getMarca().equals(filtrarMarca)){
-                    System.out.println("Nombre: "+ iterator.getNombre());
-                    System.out.println("Precio: $" + iterator.getPrecio());
-                    System.out.println("Memoria RAM: " + iterator.getRam() + " GB");
-                    System.out.println("Espacio: " + iterator.getMemoria() + " GB");
-                    System.out.println("Pantalla de " + iterator.getPulgadas() + " pulgadas");
-                    System.out.println("Soporta conexión de hasta " + iterator.getConexion());
-                    System.out.println("\n");
-                }
-            }
+        while (!opt.equals("0")){
+            System.out.println("Ingrese una opción:");
+            System.out.println("(1) Ver todos los dispositivos disponibles");
+            System.out.println("(2) Filtrar por marca");
+            System.out.println("(0) Volver al menú principal");
+            opt = reader.readLine();
+            
+            switch (opt){
+                case "1": System.out.println("----------------------");
+                          for (Dispositivo iterator: celuMap.values()){
+                              System.out.println("Nombre: "+ iterator.getNombre());
+                              System.out.println("Marca: "+ iterator.getMarca());
+                              System.out.println("Precio: $" + iterator.getPrecio());
+                              System.out.println("Memoria RAM: " + iterator.getRam() + " GB");
+                              System.out.println("Espacio: " + iterator.getMemoria() + " GB");
+                              System.out.println("Pantalla de " + iterator.getPulgadas() + " pulgadas");
+                              System.out.println("Soporta conexión de hasta " + iterator.getConexion());
+                              System.out.println("\n");
+                           }
+                           System.out.println("----------------------");
+                           break;
+                           
+                case "2": System.out.println("Ingrese qué marca de celular desea ver: ");
+                          String filtrarMarca = reader.readLine();
+                          for (Dispositivo iterator: celuMap.values()){
+                            if (iterator.getMarca().equals(filtrarMarca)){
+                                System.out.println("Nombre: "+ iterator.getNombre());
+                                System.out.println("Precio: $" + iterator.getPrecio());
+                                System.out.println("Memoria RAM: " + iterator.getRam() + " GB");
+                                System.out.println("Espacio: " + iterator.getMemoria() + " GB");
+                                System.out.println("Pantalla de " + iterator.getPulgadas() + " pulgadas");
+                                System.out.println("Soporta conexión de hasta " + iterator.getConexion());
+                                System.out.println("\n");
+                            }
+                          }
+                          break;
+            } 
         }
     }
     

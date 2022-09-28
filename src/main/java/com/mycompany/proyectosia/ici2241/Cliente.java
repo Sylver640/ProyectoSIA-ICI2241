@@ -124,4 +124,38 @@ public class Cliente {
                 System.out.println(iterator.getPlan().getNombre());
         }
     }
+    
+    public void mostrarDatos(){
+        System.out.println("----------------------");
+        System.out.println("Nombre: "+this.getNombre());
+        System.out.println("RUT: "+this.getRut());
+        System.out.println("Tiempo que lleva en la compañia: "+this.getTiempoEnMeses()+" meses");
+        System.out.println("Lista de telefonos:");
+        for (Telefono iterator: listaTelefonos.values()){
+            System.out.println(iterator.getNumero());
+        }
+    }
+    
+    public void mostrarDatosTelefono(String toShow){
+        if (!listaTelefonos.containsKey(toShow)){
+            System.out.println("Número ingresado no existe en cliente "+rut);
+            return;
+        }
+        
+        Telefono t = listaTelefonos.get(toShow);
+        System.out.println("Número: "+t.getNumero());
+        if (t.isPlan()){
+            System.out.println("Tipo de tarifa contratada: Plan");
+            System.out.println("Nombre del plan: "+t.getPlan().getNombre());
+            System.out.println("Precio de este plan para este telefono: $"+t.getPlan().getPrecio());
+        }
+        else{
+            System.out.println("Tipo de tarifa contratada: Prepago");
+            System.out.println("Saldo actual del telefono: $"+t.getPrepago().getSaldoActual());
+            System.out.println("Costo de minutos: $"+t.getPrepago().getCostoMinutos());
+            System.out.println("Costo de SMS: $"+t.getPrepago().getCostoSMS());
+        }
+        
+        System.out.println("Dispositivo contratado: "+t.getDevice().getNombre());
+    }
 }

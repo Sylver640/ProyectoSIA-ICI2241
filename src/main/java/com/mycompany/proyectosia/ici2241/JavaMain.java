@@ -37,7 +37,7 @@ public class JavaMain
             
             switch(opt)
             {
-                case 1: //colHandle.addManualPlan();
+                case 1: colHandle.mostrarInfoClientes();
                         break;
                 case 2: System.out.println("MÉTODO NO IMPLEMENTADO");
                         break;
