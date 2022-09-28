@@ -125,7 +125,7 @@ public class Cliente {
         }
     }
     
-    public void mostrarDatos(){
+    public void mostrarDatos(String a){
         System.out.println("----------------------");
         System.out.println("Nombre: "+this.getNombre());
         System.out.println("RUT: "+this.getRut());
@@ -134,6 +134,12 @@ public class Cliente {
         for (Telefono iterator: listaTelefonos.values()){
             System.out.println(iterator.getNumero());
         }
+    }
+    
+    public void mostrarDatos(int a){
+        System.out.println("Nombre: "+this.getNombre());
+        System.out.println("RUT: "+this.getRut());
+        System.out.println("Tiempo que lleva en la compañia: "+this.getTiempoEnMeses()+" meses");
     }
     
     public void mostrarDatosTelefono(String toShow){

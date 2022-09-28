@@ -294,9 +294,7 @@ public class ManejoColecciones
             switch (opt){
                 case "1": System.out.println("----------------------");
                           for (Cliente iterator: clientesMap.values()){
-                              System.out.println("Nombre de cliente: "+iterator.getNombre());
-                              System.out.println("RUT del cliente: "+iterator.getRut());
-                              System.out.println("Tiempo que lleva el cliente en la compañía: "+iterator.getTiempoEnMeses());
+                              iterator.mostrarDatos(0);
                               System.out.println("\n");
                           }
                           System.out.println("----------------------");
@@ -305,7 +303,7 @@ public class ManejoColecciones
                           String toShow = reader.readLine();
                           Cliente c = getCliente(toShow);
                           if (c != null){
-                              c.mostrarDatos();
+                              c.mostrarDatos("a");
                               System.out.println("Desea ver los datos del algún teléfono? (s/n)");
                               String fonoData = reader.readLine();
                               if (fonoData.equals("s")){
@@ -374,6 +372,24 @@ public class ManejoColecciones
         }
     }
     
+    public void editarContratos() throws IOException{
+        if (clientesMap.isEmpty()){
+            System.out.println("No existen clientes para editar!");
+            return;
+        }
+        
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Ingrese el RUT de un cliente: ");
+        String toEdit = reader.readLine();
+        
+        Cliente c = this.getCliente(toEdit);
+        if (c == null){
+            System.out.println("Cliente no encontrado");
+            return;
+        }
+        
+        
+    }
     //Método para crear un nuevo plan a partir de la opción 1 en el menú.
     /*public void addManualPlan() throws IOException{ 
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));

@@ -25,10 +25,11 @@ public class JavaMain
         {
             System.out.println("-----MENÚ-----");
             System.out.println("1. Mostrar información de clientes");
-            System.out.println("2. Planes disponibles");
-            System.out.println("3. Agregar plan a un cliente");
-            System.out.println("4. Mostrar planes contratados de un cliente");
+            System.out.println("2. Editar contratos de un cliente");
+            System.out.println("3. Editar tarifas");
+            System.out.println("4. Generar reporte actual de clientes");
             System.out.println("5. Catálogo de dispositivos");
+            System.out.println("6. Filtrar clientes");
             System.out.println("0. Salir");
             System.out.println("--------------");
             System.out.println("Ingrese una opción: ");
@@ -39,13 +40,15 @@ public class JavaMain
             {
                 case 1: colHandle.mostrarInfoClientes();
                         break;
-                case 2: System.out.println("MÉTODO NO IMPLEMENTADO");
+                case 2: colHandle.editarContratos();
                         break;
                 case 3: colHandle.addClientPlan();
                         break;
                 case 4: colHandle.showClientPlans();
                         break;
                 case 5: colHandle.mostrarDispositivos();
+                        break;
+                case 6: System.out.println("la caca");
                         break;
                 case 0: break;
             }
