@@ -384,7 +384,110 @@ public class ManejoColecciones
         return p;
     }
     
-    public void editarContratos() throws IOException{
+    public void editarPrepago (Telefono t) throws IOException{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Ingrese el nuevo saldo del teléfono:");
+        long newSaldo = Integer.parseInt(reader.readLine());
+        t.getPrepago().setSaldoActual(newSaldo);
+        System.out.println("Ingrese el nuevo costo de los minutos:");
+        long newMinutos = Integer.parseInt(reader.readLine());
+        t.getPrepago().setCostoMinutos(newMinutos);
+        System.out.println("Ingrese el nuevo costo de los mensajes:");
+        long newSMS = Integer.parseInt(reader.readLine());
+        t.getPrepago().setCostoSMS(newSMS);
+        
+        prepagoMap.replace(t.getNumero(), t.getPrepago());
+        System.out.println("Prepago editado correctamente");
+    }
+    
+    public void cambiarPlan(Telefono t) throws IOException{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String opt = "0";
+        while (opt.length() == 1){
+            System.out.println("Ingrese el nombre del nuevo plan para el teléfono: ");
+            System.out.println("Si desea ver los nombres de los planes disponibles, presione 1");
+            opt = reader.readLine();
+            if (opt.equals("1")){
+                System.out.println("Planes disponibles:");
+                for (Plan iterator: planesMap.values()){
+                    System.out.println("- "+iterator.getNombre());
+                }
+            } else{
+                Plan p = this.getPlan(opt);
+                if (p == null){
+                    System.out.println("Plan ingresado no existe");
+                }
+                t.setPlan(p);
+                System.out.println("Plan cambiado con éxito");
+            }
+        }
+        
+    }
+    
+    public void switchTarifa(Telefono t) throws IOException{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        if (t.getPlan() == null){
+            System.out.println("Ingrese el nombre del nuevo plan para el teléfono prepago:");
+            String nombrePlan = reader.readLine();
+            Plan p = this.getPlan(nombrePlan);
+            if (p == null){
+                System.out.println("Plan ingresado no existe");
+                return;
+            }
+            t.setPrepago(null);
+            t.setPlan(p);
+            prepagoMap.remove(t.getNumero());
+            return;
+        }
+        
+        if (t.getPrepago() == null){
+            System.out.println("Ahora ingrese los detalles para el nuevo prepago:\n");
+            Prepago p = this.agregarNuevoPrepago(t.getNumero());
+            t.setPrepago(p);
+            t.setPlan(null);
+        }
+    }
+    
+    public boolean editarTarifaCliente(String telefono, Cliente c) throws IOException{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Telefono editTar = c.getTelefono(telefono);
+        if (editTar == null){
+            return false;
+        }
+        
+        if (editTar.getPlan() == null && editTar.getPrepago() != null){
+            System.out.println("El teléfono "+editTar.getNumero()+" está contratado como prepago");
+            System.out.println("Qué desea hacer?");
+            System.out.println("(1) Editar prepago");
+            System.out.println("(2) Cambiar de tipo de tarifa");
+            System.out.println("(0) Volver");
+            String opt = reader.readLine();
+            
+            switch(opt){
+                case "1": editarPrepago(editTar);
+                case "2": switchTarifa(editTar);
+            }
+        }
+        
+        if (editTar.getPlan() != null && editTar.getPrepago() == null){
+            System.out.println("El teléfono "+editTar.getNumero()+" está contratado como plan");
+            System.out.println("Qué desea hacer?");
+            System.out.println("(1) Cambiar a otro plan");
+            System.out.println("(2) Cambiar de tipo de tarifa");
+            System.out.println("(0) Volver");
+            String opt = reader.readLine();
+            
+            switch(opt){
+                case "1": cambiarPlan(editTar);
+                case "2": switchTarifa(editTar);
+            }
+        }
+        
+        
+        return true;
+    }
+    
+    public void administrarContratos() throws IOException{
         if (clientesMap.isEmpty()){
             System.out.println("No existen clientes para editar!");
             return;
@@ -459,7 +562,14 @@ public class ManejoColecciones
                           System.out.println("El cliente "+c.getRut()+" no tiene este teléfono contratado");
                           break;
                           
-                case "3": break;
+                case "3": System.out.println("Ingrese el número que desea editar:");
+                          String tarifaEditar = reader.readLine();
+                          if (this.editarTarifaCliente(tarifaEditar, c)){
+                              //System.out.println("Teléfono "+c.getTelefono(tarifaEditar).getNumero()+" editado correctamente");
+                              break;
+                          }
+                          System.out.println("El cliente "+c.getRut()+" no tiene este teléfono contratado");
+                          break;
             }
         }
     }

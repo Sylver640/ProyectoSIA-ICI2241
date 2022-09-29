@@ -26,7 +26,7 @@ public class JavaMain
             System.out.println("-----MENÚ-----");
             System.out.println("1. Mostrar información de clientes");
             System.out.println("2. Editar contratos de un cliente");
-            System.out.println("3. Editar tarifas");
+            System.out.println("3. Administrar planes");
             System.out.println("4. Generar reporte actual de clientes");
             System.out.println("5. Catálogo de dispositivos");
             System.out.println("6. Filtrar clientes");
@@ -40,7 +40,7 @@ public class JavaMain
             {
                 case 1: colHandle.mostrarInfoClientes();
                         break;
-                case 2: colHandle.editarContratos();
+                case 2: colHandle.administrarContratos();
                         break;
                 case 3: colHandle.addClientPlan();
                         break;

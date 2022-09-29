@@ -37,22 +37,22 @@ public class Plan extends Tarifa{
     
     @Override
     public String getNombre() {
-        return super.getNombre(); //To change body of generated methods, choose Tools | Templates.
+        return super.getNombre();
     }
     
     @Override
     public void setNombre(String nombre) {
-        super.setNombre(nombre); //To change body of generated methods, choose Tools | Templates.
+        super.setNombre(nombre);
     }
     
     @Override
     public String getTipo() {
-        return super.getTipo(); //To change body of generated methods, choose Tools | Templates.
+        return super.getTipo();
     }
 
     @Override
     public void setTipo(String tipo) {
-        super.setTipo(tipo); //To change body of generated methods, choose Tools | Templates.
+        super.setTipo(tipo);
     }
 
     public void setPrecio(long precio) {
