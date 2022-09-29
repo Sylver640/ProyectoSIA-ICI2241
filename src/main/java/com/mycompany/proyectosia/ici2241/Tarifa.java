@@ -22,5 +22,10 @@ public class Tarifa {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }    
+    }
+    
+    public void mostrarDetallesTarifa(){
+        System.out.println("Nombre: "+getNombre());
+        System.out.println("Tipo: "+getTipo());
+    }
 }

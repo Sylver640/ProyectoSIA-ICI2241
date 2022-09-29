@@ -98,4 +98,13 @@ public class Plan extends Tarifa{
     public int getSMS() {
         return SMS;
     }
+    
+    @Override
+    public void mostrarDetallesTarifa(){
+        System.out.println("Nombre: "+getNombre());
+        System.out.println("Precio del plan: $"+getPrecio());
+        System.out.println("Minutos: "+getMinutos());
+        System.out.println("Megas: "+getMegas()+" MB");
+        System.out.println("Mensajes: "+getSMS());
+    }
 }

@@ -80,4 +80,12 @@ public class Prepago extends Tarifa{
     public long getCostoSMS() {
         return costoSMS;
     }
+    
+    @Override
+    public void mostrarDetallesTarifa(){
+        System.out.println("Nombre: "+getNombre());
+        System.out.println("Saldo actual del cliente: $"+getSaldoActual());
+        System.out.println("Valor de cada minuto: $"+getCostoMinutos());
+        System.out.println("Valor de cada mensaje: $"+getCostoSMS());
+    }
 }
