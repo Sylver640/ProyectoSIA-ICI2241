@@ -64,6 +64,34 @@ public class ManejoColecciones
         }
     }
     
+    //Método para crear un nuevo plan a partir de la opción 1 en el menú.
+    /*public void addManualPlan() throws IOException{ 
+        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+        String dataPlan;
+        String namePlan;
+        long price;
+        int minutes;
+        int mbs;
+        System.out.println("Por favor inserte el nombre de su plan: ");
+        dataPlan = read.readLine();
+        namePlan = dataPlan;
+        
+        System.out.println("Por favor inserte el precio de su plan: ");
+        dataPlan = read.readLine();
+        price = Integer.parseInt(dataPlan);
+        
+        System.out.println("Por favor inserte la cantidad de megas en su plan: ");
+        dataPlan = read.readLine();
+        mbs = Integer.parseInt(dataPlan);
+        
+        System.out.println("Por favor inserte la cantidad de minutos en su plan: ");
+        dataPlan = read.readLine();
+        minutes = Integer.parseInt(dataPlan);
+        
+        Plan newPlan = new Plan(namePlan,"Postpago",price,mbs,minutes);
+        addNewPlan(newPlan);        
+    }*/
+    
     public void addPrepago (Prepago toAdd){
         String numeroVinculado = toAdd.getNombre();
         
@@ -565,7 +593,6 @@ public class ManejoColecciones
                 case "3": System.out.println("Ingrese el número que desea editar:");
                           String tarifaEditar = reader.readLine();
                           if (this.editarTarifaCliente(tarifaEditar, c)){
-                              //System.out.println("Teléfono "+c.getTelefono(tarifaEditar).getNumero()+" editado correctamente");
                               break;
                           }
                           System.out.println("El cliente "+c.getRut()+" no tiene este teléfono contratado");
@@ -573,31 +600,73 @@ public class ManejoColecciones
             }
         }
     }
-    //Método para crear un nuevo plan a partir de la opción 1 en el menú.
-    /*public void addManualPlan() throws IOException{ 
-        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
-        String dataPlan;
-        String namePlan;
-        long price;
-        int minutes;
-        int mbs;
-        System.out.println("Por favor inserte el nombre de su plan: ");
-        dataPlan = read.readLine();
-        namePlan = dataPlan;
+    
+    public void mostrarClientesMarca() throws IOException{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int contTotal = 0;
+        System.out.println("Ingrese la marca a buscar:");
+        String showMarca = reader.readLine();
         
-        System.out.println("Por favor inserte el precio de su plan: ");
-        dataPlan = read.readLine();
-        price = Integer.parseInt(dataPlan);
+        System.out.println("----------------------");
         
-        System.out.println("Por favor inserte la cantidad de megas en su plan: ");
-        dataPlan = read.readLine();
-        mbs = Integer.parseInt(dataPlan);
+        for (Cliente iterator: clientesMap.values()){
+            if (iterator.buscarMarcaEnTelefono(showMarca)){
+                contTotal++;
+            }
+        }
         
-        System.out.println("Por favor inserte la cantidad de minutos en su plan: ");
-        dataPlan = read.readLine();
-        minutes = Integer.parseInt(dataPlan);
+        if (contTotal == 0){
+            System.out.println("Ningún cliente tiene contratado un dispositivo de esta marca!");
+        }
         
-        Plan newPlan = new Plan(namePlan,"Postpago",price,mbs,minutes);
-        addNewPlan(newPlan);        
-    }*/
+        System.out.println("Se ha(n) encontrado "+contTotal+" cliente(s) con teléfonos que tienen contratados dispositivos de esta marca!");
+        
+        System.out.println("----------------------");
+    }
+    
+    public void mostrarClientesPlanes() throws IOException{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int cont = 0;
+    }
+    
+    public void mostrarClientesMeses() throws IOException{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int cont = 0;
+    }
+    
+    public void filtrarClientes() throws IOException{
+        if (clientesMap.isEmpty()){
+            System.out.println("No existen clientes para listar!");
+            return;
+        }
+        
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String opt = "";
+        
+        while (!opt.equals("0")){
+            System.out.println("Qué desea realizar?");
+            System.out.println("(1) Seleccionar clientes con marca de teléfono contratado");
+            System.out.println("(2) Seleccionar clientes que tengan cierto plan contratado");
+            System.out.println("(3) Mostrar clientes que lleven más de ciertos meses determinados");
+            System.out.println("(0) Volver al menú principal");
+            opt = reader.readLine();
+            
+            switch (opt){
+                case "1": this.mostrarClientesMarca();
+                          break;
+                case "2": this.mostrarClientesPlanes();
+                          break;
+                case "3": this.mostrarClientesMeses();
+                          break;
+            }
+        }
+    }
+    
+    public void administrarPlanes(){
+        
+    }
+    
+    public void generarReporte(){
+        
+    }
 }

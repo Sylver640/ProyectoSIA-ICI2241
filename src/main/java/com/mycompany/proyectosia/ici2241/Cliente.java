@@ -183,4 +183,19 @@ public class Cliente {
         Telefono nuevo = new Telefono(telefono, d, p);
         this.addTelefono(nuevo, telefono);
     }
+    
+    public boolean buscarMarcaEnTelefono(String marca){
+        int cont = 0;
+        for (Telefono iterator: listaTelefonos.values()){
+            if (iterator.getDevice().getMarca().equals(marca)){
+                System.out.println("Cliente " + getRut() + " con teléfono "+iterator.getNumero()+" tiene vinculado un dispositivo marca "+marca);
+                cont++;
+            }
+        }
+        
+        if (cont == 0)
+            return false;
+        
+        return true;
+    }
 }
