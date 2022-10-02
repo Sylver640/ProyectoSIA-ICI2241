@@ -183,4 +183,47 @@ public class Cliente {
         Telefono nuevo = new Telefono(telefono, d, p);
         this.addTelefono(nuevo, telefono);
     }
+    
+    public boolean buscarMarcaEnTelefono(String marca) throws TieneDispositivoException{
+        int cont = 0;
+        for (Telefono iterator: listaTelefonos.values()){
+            try{
+                if (iterator.getDevice().getMarca().equals(marca)){
+                    System.out.println("Cliente " + getRut() + " con teléfono "+iterator.getNumero()+" tiene vinculado un dispositivo marca "+marca);
+                    cont++;
+                }
+            }
+            catch (NullPointerException e){
+                throw new TieneDispositivoException();
+            }
+        }
+        
+        if (cont == 0)
+            return false;
+        
+        return true;
+    }
+    
+    public boolean buscarPlanEnTelefono(String plan) throws NotTarifaException{
+        int cont = 0;
+        for (Telefono iterator: listaTelefonos.values()){
+            try{
+                if (iterator.getPlan() != null){
+                    if (iterator.getPlan().getNombre().equals(plan)){
+                        System.out.println("Cliente " + getRut() + " con teléfono "+iterator.getNumero()+" tiene contratado/a el plan "+plan);
+                        cont++;
+                    }
+                }
+            }
+            catch (NullPointerException a){
+                throw new NotTarifaException();
+            }
+            
+        }
+        
+        if (cont == 0)
+            return false;
+        
+        return true;
+    }
 }
