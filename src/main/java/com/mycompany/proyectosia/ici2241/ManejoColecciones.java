@@ -23,6 +23,7 @@ public class ManejoColecciones
         if (clientesMap.containsKey(rut)){
             return clientesMap.get(rut);
         }
+        
         return null;
     }
     
@@ -63,6 +64,26 @@ public class ManejoColecciones
             planesMap.put(nombre, toAdd);
         }
     }
+    
+    public String[][] generarTabla(){
+        int i = 0;
+        
+        String[][] tabla =new String[clientesMap.size()][3];
+        
+        if(clientesMap.entrySet() == null){
+            return tabla;
+        }
+        
+        for (Map.Entry<String, Cliente> entry: clientesMap.entrySet()){
+            Cliente cliente = entry.getValue();
+            tabla[i][0] = cliente.getNombre();
+            tabla[i][1] = cliente.getRut();
+            tabla[i][2] = "" + cliente.getTiempoEnMeses(); 
+            i+=1;
+        }
+        
+        return tabla;
+    } 
     
     public void addPrepago (Prepago toAdd){
         String numeroVinculado = toAdd.getNombre();
