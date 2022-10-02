@@ -664,27 +664,26 @@ public class ManejoColecciones
         }
     }
     
-    public void mostrarClientesMarca() throws IOException, TieneDispositivoException{
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        int contTotal = 0;
-        System.out.println("Ingrese la marca a buscar:");
-        String showMarca = reader.readLine();
+    public String[][] importTablaMarca(String marca) throws TieneDispositivoException{
+        int i = 0;
+        String[][] t = new String[clientesMap.size()][3];
         
-        System.out.println("----------------------");
+        if (clientesMap.entrySet() == null){
+            return t;
+        }
         
-        for (Cliente iterator: clientesMap.values()){
-            if (iterator.buscarMarcaEnTelefono(showMarca)){
-                contTotal++;
+        for (Map.Entry<String, Cliente> entry: clientesMap.entrySet()){
+            Cliente clienteConMarca = entry.getValue();
+            String telefonosConMarca = clienteConMarca.buscarMarcaEnTelefonoSwing(marca);
+            if (!telefonosConMarca.equals("")){
+                t[i][0] = clienteConMarca.getNombre();
+                t[i][1] = clienteConMarca.getRut();
+                t[i][2] = telefonosConMarca;
             }
+            i++;
         }
         
-        if (contTotal == 0){
-            System.out.println("Ningún cliente tiene contratado un dispositivo de esta marca!");
-        }
-        
-        System.out.println("Se ha(n) encontrado "+contTotal+" cliente(s) con teléfonos que tienen contratados dispositivos de esta marca!");
-        
-        System.out.println("----------------------");
+        return t;
     }
     
     public void mostrarClientesPlanes() throws IOException, NotTarifaException{
@@ -743,27 +742,18 @@ public class ManejoColecciones
         
         while (!opt.equals("0")){
             System.out.println("Qué desea realizar?");
-            System.out.println("(1) Seleccionar clientes con marca de teléfono contratado");
-            System.out.println("(2) Seleccionar clientes que tengan cierto plan contratado");
-            System.out.println("(3) Mostrar clientes que lleven más de ciertos meses determinados");
+            System.out.println("(1) Seleccionar clientes que tengan cierto plan contratado");
+            System.out.println("(2) Mostrar clientes que lleven más de ciertos meses determinados");
             System.out.println("(0) Volver al menú principal");
             opt = reader.readLine();
             
             switch (opt){
-                case "1": this.mostrarClientesMarca();
+                case "1": this.mostrarClientesPlanes();
                           break;
-                case "2": this.mostrarClientesPlanes();
-                          break;
-                case "3": this.mostrarClientesMeses();
+                case "2": this.mostrarClientesMeses();
                           break;
             }
         }
-    }
-    
-    public String[][] importTablaMarca(String marca){
-        String[][] t = new String[15][4](); //???
-        
-        return t;
     }
     
     public void generarReporte(){

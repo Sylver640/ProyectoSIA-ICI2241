@@ -6,6 +6,9 @@
 package com.mycompany.proyectosia.ici2241.ventanas;
 
 import com.mycompany.proyectosia.ici2241.ManejoColecciones;
+import com.mycompany.proyectosia.ici2241.TieneDispositivoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -15,15 +18,21 @@ import javax.swing.JFrame;
 public class ResultadosMarca extends javax.swing.JFrame {
     JFrame ventanaPrincipal;
     ManejoColecciones colHandle;
+    String marca;
     /**
      * Creates new form ResultadosMarca
      */
     public ResultadosMarca(JFrame padre, ManejoColecciones colHandle, String marca) {
         ventanaPrincipal = padre;
         this.colHandle = colHandle;
+        this.marca = marca;
         initComponents();
         this.setLocationRelativeTo(null);
-        String[][] tabla = colHandle.importTablaMarca(marca);
+        try {
+            importTablaMarca();
+        } catch (TieneDispositivoException ex) {
+            Logger.getLogger(ResultadosMarca.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -54,13 +63,13 @@ public class ResultadosMarca extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Nombre Cliente", "RUT", "Numero Dispositivo", "Nombre Dispositivo"
+                "Nombre Cliente", "RUT", "Numeros"
             }
         ));
         jScrollPane1.setViewportView(jTable2);
@@ -97,7 +106,20 @@ public class ResultadosMarca extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void importTablaMarca() throws TieneDispositivoException{
+        String[][] tabla = colHandle.importTablaMarca(marca);
+        
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+                    tabla,
+                    new String[]{"Nombre Cliente", "RUT", "Telefonos"}
+        ){
+            public boolean isCellEditTable(int row, int column){
+                return false;
+            }
+        });
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Volver al menú principal.
         ventanaPrincipal.setVisible(true);

@@ -10,7 +10,6 @@ public class JavaMain
 {
     public static void main(String[] args) throws IOException, NotTarifaException, TieneDispositivoException
     {
-        //Se presume que quien usarío esta aplicación es una empresa, por lo que no existe un inicio de sesión
         //Variables de lectura
         //BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
         //String ingresado;

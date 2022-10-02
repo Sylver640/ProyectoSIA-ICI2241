@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package com.mycompany.proyectosia.ici2241.ventanas;
-
-import com.mycompany.proyectosia.ici2241.Dispositivo;
 import com.mycompany.proyectosia.ici2241.ManejoColecciones;
 import javax.swing.JFrame;
 

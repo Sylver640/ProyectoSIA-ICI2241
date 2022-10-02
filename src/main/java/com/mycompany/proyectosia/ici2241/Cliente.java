@@ -251,57 +251,24 @@ public class Cliente {
         this.addTelefono(nuevo, telefono);
     }
     
-    public boolean buscarMarcaEnTelefono(String marca) throws TieneDispositivoException{
-        int cont = 0;
+    public String buscarMarcaEnTelefonoSwing(String marca) throws TieneDispositivoException{
+        if (listaTelefonos.isEmpty()){
+            return "";
+        }
+        
+        String telefonos = "";
+        
         for (Telefono iterator: listaTelefonos.values()){
             try{
                 if (iterator.getDevice().getMarca().equals(marca)){
-                    System.out.println("Cliente " + getRut() + " con teléfono "+iterator.getNumero()+" tiene vinculado un dispositivo marca "+marca);
-                    cont++;
+                    telefonos = ""+iterator.getNumero();
                 }
-            }
-            catch (NullPointerException e){
+            } catch (NullPointerException e){
                 throw new TieneDispositivoException();
             }
         }
         
-        if (cont == 0)
-            return false;
-        
-        return true;
-    }
-    
-    public String[][] buscarMarcaEnTelefonoSwing(String marcaS) throws TieneDispositivoException{
-        int i = 0;
-        ArrayList<Telefono> numerosGuard = new ArrayList<Telefono>();
-        
-        for (Map.Entry<String, Telefono> entry: listaTelefonos.entrySet()){
-            Telefono tel = entry.getValue();
-            try{
-                if(tel.getDevice().getMarca().equals(marcaS)){
-                    numerosGuard.add(tel);
-                }
-            } catch(NullPointerException a){
-                throw new TieneDispositivoException();
-            }
-            
-        }
-                
-        String[][] marcaF = new String[numerosGuard.size()][4];
-        
-        if(listaTelefonos.entrySet() == null){
-            return marcaF;
-        }
-        
-        for (i = 0; i < numerosGuard.size(); i++){
-            marcaF[i][0] = getNombre();
-            marcaF[i][1] = getRut();
-            marcaF[i][2] = numerosGuard.get(i).getNumero();
-            marcaF[i][3] = numerosGuard.get(i).getDevice().getNombre();
-            i+=1;
-        }
-        
-        return marcaF;
+        return telefonos;
     }
     
     public boolean buscarPlanEnTelefono(String plan) throws NotTarifaException{
