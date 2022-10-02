@@ -194,7 +194,7 @@ public class VentanaPrincipal extends javax.swing.JFrame{
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // Buscar cliente
-        BuscarCliente buscar = new BuscarCliente(this, colHandle);
+        InsertRUT buscar = new InsertRUT(this, colHandle);
         buscar.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton8ActionPerformed
