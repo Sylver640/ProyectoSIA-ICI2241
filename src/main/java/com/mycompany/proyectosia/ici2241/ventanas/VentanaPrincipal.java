@@ -169,7 +169,7 @@ public class VentanaPrincipal extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Opción1
+        // Mostrar todos los clientes
         MostrarTodosClientes mostrar = new MostrarTodosClientes(this, colHandle);
         mostrar.setVisible(true);
         this.setVisible(false);
@@ -198,7 +198,10 @@ public class VentanaPrincipal extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // Opción5
+        // Mostrar el catálogo de dispositivos
+        MostrarDispositivos mostrarCelus = new MostrarDispositivos(this, colHandle);
+        mostrarCelus.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
