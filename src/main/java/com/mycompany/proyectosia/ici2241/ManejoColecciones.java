@@ -686,6 +686,28 @@ public class ManejoColecciones
         return t;
     }
     
+    public String[][] importTablaPlan(String plan) throws NotTarifaException{
+        int i = 0;
+        String[][] t = new String[clientesMap.size()][3];
+        
+        if (clientesMap.entrySet() == null){
+            return t;
+        }
+        
+        for (Map.Entry<String, Cliente> entry: clientesMap.entrySet()){
+            Cliente clienteConPlan = entry.getValue();
+            String telefonosConPlan= clienteConPlan.buscarPlanEnTelefonoSwing(plan);
+            if (!telefonosConPlan.equals("")){
+                t[i][0] = clienteConPlan.getNombre();
+                t[i][1] = clienteConPlan.getRut();
+                t[i][2] = telefonosConPlan;
+            }
+            i++;
+        }
+        
+        return t;
+    }
+    
     public void mostrarClientesPlanes() throws IOException, NotTarifaException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int contTotal = 0;

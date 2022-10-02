@@ -271,6 +271,28 @@ public class Cliente {
         return telefonos;
     }
     
+    public String buscarPlanEnTelefonoSwing(String plan) throws NotTarifaException{
+        if (listaTelefonos.isEmpty()){
+            return "";
+        }
+        
+        String telefonos = "";
+        
+        for (Telefono iterator: listaTelefonos.values()){
+            try{
+                if (iterator.getPlan() != null){
+                    if(iterator.getPlan().getNombre().equals(plan)){
+                        telefonos = ""+iterator.getNumero();
+                    }
+                }
+            } catch (NullPointerException e){
+                throw new NotTarifaException();
+            }
+        }
+        
+        return telefonos;
+    }
+    
     public boolean buscarPlanEnTelefono(String plan) throws NotTarifaException{
         int cont = 0;
         for (Telefono iterator: listaTelefonos.values()){
