@@ -1,6 +1,8 @@
 package com.mycompany.proyectosia.ici2241;
 import java.util.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ManejoColecciones 
 {
@@ -216,6 +218,8 @@ public class ManejoColecciones
                                         toAdd);
             this.addCliente(toAdd);
         }
+        
+        clientesCSV.close();
     }
     
     //Método para la lectura del archivo planes.csv ubicado en la carpeta raiz del programa
@@ -238,6 +242,33 @@ public class ManejoColecciones
             toAdd = new Plan(planesCSV, linea);
             this.addNewPlan(toAdd);
         }
+        
+        planesCSV.close();
+    }
+    
+    public void exportPlanes() throws FileNotFoundException, IOException{
+        File delete = new File("planes.csv");
+        delete.delete();
+        
+        FileWriter nuevoPlanes = new FileWriter("planes.csv");
+        
+        for (Plan iterator: planesMap.values()){
+            nuevoPlanes.append(iterator.getNombre());
+            nuevoPlanes.append(",");
+            nuevoPlanes.append(iterator.getTipo());
+            nuevoPlanes.append(",");
+            nuevoPlanes.append(""+iterator.getPrecio());
+            nuevoPlanes.append(",");
+            nuevoPlanes.append(""+iterator.getMinutos());
+            nuevoPlanes.append(",");
+            nuevoPlanes.append(""+iterator.getMegas());
+            nuevoPlanes.append(",");
+            nuevoPlanes.append(""+iterator.getSMS());
+            nuevoPlanes.append("\n");
+        }
+        
+        nuevoPlanes.flush();
+        nuevoPlanes.close();
     }
     
     public void importPrepago() throws FileNotFoundException, IOException{
@@ -256,6 +287,31 @@ public class ManejoColecciones
             toAdd = new Prepago(prepagoCSV, linea);
             this.addPrepago(toAdd);
         }
+        
+        prepagoCSV.close();
+    }
+    
+    public void exportPrepago() throws FileNotFoundException, IOException{
+        File delete = new File("prepagos.csv");
+        delete.delete();
+        
+        FileWriter nuevoPrepagos = new FileWriter("prepagos.csv");
+        
+        for (Prepago iterator: prepagoMap.values()){
+            nuevoPrepagos.append(iterator.getNombre());
+            nuevoPrepagos.append(",");
+            nuevoPrepagos.append(iterator.getTipo());
+            nuevoPrepagos.append(",");
+            nuevoPrepagos.append(""+iterator.getSaldoActual());
+            nuevoPrepagos.append(",");
+            nuevoPrepagos.append(""+iterator.getCostoMinutos());
+            nuevoPrepagos.append(",");
+            nuevoPrepagos.append(""+iterator.getCostoSMS());
+            nuevoPrepagos.append("\n");
+        }
+        
+        nuevoPrepagos.flush();
+        nuevoPrepagos.close();
     }
     
     public void importDispositivos() throws FileNotFoundException, IOException {
@@ -274,6 +330,34 @@ public class ManejoColecciones
             toAdd = new Dispositivo(dispositivosCSV, linea);
             this.addDispositivo(toAdd);
         }
+        
+        dispositivosCSV.close();
+    }
+    
+    public void exportDispositivos() throws FileNotFoundException, IOException{
+        File delete = new File("dispositivos.csv");
+        delete.delete();
+        
+        FileWriter nuevoDispositivos = new FileWriter("dispositivos.csv");
+        for (Dispositivo iterator: celuMap.values()){
+            nuevoDispositivos.append(iterator.getNombre());
+            nuevoDispositivos.append(",");
+            nuevoDispositivos.append(iterator.getMarca());
+            nuevoDispositivos.append(",");
+            nuevoDispositivos.append(""+iterator.getRam());
+            nuevoDispositivos.append(",");
+            nuevoDispositivos.append(""+iterator.getMemoria());
+            nuevoDispositivos.append(",");
+            nuevoDispositivos.append(""+iterator.getPrecio());
+            nuevoDispositivos.append(",");
+            nuevoDispositivos.append(""+iterator.getPulgadas());
+            nuevoDispositivos.append(",");
+            nuevoDispositivos.append(iterator.getConexion());
+            nuevoDispositivos.append("\n");
+        }
+        
+        nuevoDispositivos.flush();
+        nuevoDispositivos.close();
     }
     
     //Método para mostrar los planes de un cliente en específico.
@@ -304,19 +388,11 @@ public class ManejoColecciones
         
         while (!opt.equals("0")){
             System.out.println("Ingrese una opción:");
-            System.out.println("(1) Mostrar datos de todos los clientes");
             System.out.println("(2) Mostrar información de un cliente");
             System.out.println("(0) Volver al menú principal");
             opt = reader.readLine();
             
             switch (opt){
-                case "1": System.out.println("----------------------");
-                          for (Cliente iterator: clientesMap.values()){
-                              iterator.mostrarDatos(0);
-                              System.out.println("\n");
-                          }
-                          System.out.println("----------------------");
-                          break;
                 case "2": System.out.println("Ingrese el RUT del cliente: ");
                           String toShow = reader.readLine();
                           Cliente c = getCliente(toShow);

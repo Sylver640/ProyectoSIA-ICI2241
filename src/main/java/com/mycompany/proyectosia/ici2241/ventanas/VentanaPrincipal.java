@@ -1,6 +1,10 @@
 package com.mycompany.proyectosia.ici2241.ventanas;
 
 import com.mycompany.proyectosia.ici2241.ManejoColecciones;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -172,7 +176,16 @@ public class VentanaPrincipal extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // Salir 
+        try {
+            // Salir
+            colHandle.exportPlanes();
+            colHandle.exportPrepago();
+            colHandle.exportDispositivos();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
