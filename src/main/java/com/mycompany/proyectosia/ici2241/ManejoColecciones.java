@@ -64,7 +64,7 @@ public class ManejoColecciones
         }
     }
     
-    public String[][] generarTabla(){
+    public String[][] mostrarTodosLosClientes(){
         int i = 0;
         
         String[][] tabla =new String[clientesMap.size()][3];
@@ -82,35 +82,7 @@ public class ManejoColecciones
         }
         
         return tabla;
-    } 
-    
-    //Método para crear un nuevo plan a partir de la opción 1 en el menú.
-    /*public void addManualPlan() throws IOException{ 
-        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
-        String dataPlan;
-        String namePlan;
-        long price;
-        int minutes;
-        int mbs;
-        System.out.println("Por favor inserte el nombre de su plan: ");
-        dataPlan = read.readLine();
-        namePlan = dataPlan;
-        
-        System.out.println("Por favor inserte el precio de su plan: ");
-        dataPlan = read.readLine();
-        price = Integer.parseInt(dataPlan);
-        
-        System.out.println("Por favor inserte la cantidad de megas en su plan: ");
-        dataPlan = read.readLine();
-        mbs = Integer.parseInt(dataPlan);
-        
-        System.out.println("Por favor inserte la cantidad de minutos en su plan: ");
-        dataPlan = read.readLine();
-        minutes = Integer.parseInt(dataPlan);
-        
-        Plan newPlan = new Plan(namePlan,"Postpago",price,mbs,minutes);
-        addNewPlan(newPlan);        
-    }*/
+    }
     
     public void addPrepago (Prepago toAdd){
         String numeroVinculado = toAdd.getNombre();
@@ -126,7 +98,7 @@ public class ManejoColecciones
     }
     
     //Método para añadir un plan existente al telefono de un cliente.
-    public void addClientPlan() throws IOException
+    /*public void addClientPlan() throws IOException
     {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         String Ingr;
@@ -162,7 +134,7 @@ public class ManejoColecciones
             return;
         }
         
-    }
+    }*/
     
     public void addCliente(Cliente toAdd)
     {

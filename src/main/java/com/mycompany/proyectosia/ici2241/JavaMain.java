@@ -1,4 +1,5 @@
 package com.mycompany.proyectosia.ici2241;
+import com.mycompany.proyectosia.ici2241.ventanas.*;
 import java.io.*;
 
 /*
@@ -11,44 +12,46 @@ public class JavaMain
     {
         //Se presume que quien usarío esta aplicación es una empresa, por lo que no existe un inicio de sesión
         //Variables de lectura
-        BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-        String ingresado;
-        int opt = 1;
+        //BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
+        //String ingresado;
+        //int opt = 1;
         ManejoColecciones colHandle = new ManejoColecciones();
         colHandle.importPlanes();
         colHandle.importPrepago();
         colHandle.importDispositivos();
         colHandle.importClientes();
         
-        //Creación del menú
-        while (opt != 0)
-        {
-            System.out.println("-----MENÚ-----");
-            System.out.println("1. Mostrar información de clientes");
-            System.out.println("2. Editar contratos de un cliente");
-            System.out.println("3. Generar reporte actual de clientes");
-            System.out.println("4. Catálogo de dispositivos");
-            System.out.println("5. Filtrar clientes");
-            System.out.println("0. Salir");
-            System.out.println("--------------");
-            System.out.println("Ingrese una opción: ");
-            ingresado = lector.readLine();
-            opt = Integer.parseInt(ingresado);
-            
-            switch(opt)
-            {
-                case 1: colHandle.mostrarInfoClientes();
-                        break;
-                case 2: colHandle.administrarContratos();
-                        break;
-                case 3: colHandle.generarReporte();
-                        break;
-                case 4: colHandle.mostrarDispositivos();
-                        break;
-                case 5: colHandle.filtrarClientes();
-                        break;
-                case 0: break;
+        VentanaPrincipal vp = new VentanaPrincipal(colHandle);
+        vp.setVisible(true);
+        
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarTodosClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarTodosClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarTodosClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarTodosClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
     }
 }
