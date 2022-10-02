@@ -13,12 +13,13 @@ public class ManejoColecciones
     //Mapa con todos los dispositivos disponibles
     private HashMap <String,Dispositivo> celuMap = new HashMap<String,Dispositivo>();
     
-    //Constructor
+    //Constructor sin parámetros.
     public ManejoColecciones()
     {
     
     }
     
+    //Getter de cliente.
     public Cliente getCliente(String rut){
         if (clientesMap.containsKey(rut)){
             return clientesMap.get(rut);
@@ -26,6 +27,7 @@ public class ManejoColecciones
         return null;
     }
     
+    //Getter de plan.
     public Plan getPlan(String nombre){
         if (planesMap.containsKey(nombre)){
             return planesMap.get(nombre);
@@ -33,6 +35,7 @@ public class ManejoColecciones
         return null;
     }
     
+    //Getter de dispositivo.
     public Dispositivo getDevice(String nombre){
         if (celuMap.containsKey(nombre)){
             return celuMap.get(nombre);
@@ -40,6 +43,7 @@ public class ManejoColecciones
         return null;
     }
     
+    //Getter de prepago.
     public Prepago getPrepago(String telefono){
         if (prepagoMap.containsKey(telefono)){
             return prepagoMap.get(telefono);
@@ -64,6 +68,7 @@ public class ManejoColecciones
         }
     }
     
+    //Retorna una tabla con todos los clientes y sus datos.
     public String[][] mostrarTodosLosClientes(){
         int i = 0;
         
@@ -84,6 +89,7 @@ public class ManejoColecciones
         return tabla;
     }
     
+    //Retorna una tabla con todos los dispositivos y sus datos.
     public String [][] mostrarDispositivos(){
         int i = 0;
         
@@ -108,6 +114,7 @@ public class ManejoColecciones
         return tabla;
     }
     
+    //Aañade un prepago al mapa de prepagos.
     public void addPrepago (Prepago toAdd){
         String numeroVinculado = toAdd.getNombre();
         
@@ -121,45 +128,7 @@ public class ManejoColecciones
         }
     }
     
-    //Método para añadir un plan existente al telefono de un cliente.
-    /*public void addClientPlan() throws IOException
-    {
-        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
-        String Ingr;
-        System.out.println("Por favor, inserte el nombre del plan a agregar al cliente: ");
-        Ingr = read.readLine();
-        
-        if(planesMap.containsKey(Ingr) == true){
-            
-            Plan toAdd = planesMap.get(Ingr);
-            System.out.println("Por favor, inserte el RUT del cliente: ");
-            Ingr = read.readLine();
-            
-            if(clientesMap.containsKey(Ingr)==true){
-                Cliente searched = clientesMap.get(Ingr);
-                System.out.println("Por favor, inserte el teléfono del cliente en donde el plan tomará acción: ");
-                Ingr = read.readLine();
-                
-                if(searched.getTelefono(Ingr) != null){
-                    searched.addPlan(toAdd, Ingr);
-                    
-                }else{
-                    System.out.println("Lo sentimos, el telefono buscado no existe");
-                    return;
-                }
-                
-            }else{
-                System.out.println("Lo sentimos, el cliente buscado no existe");
-                return;
-            }
-            
-        }else{
-            System.out.println("Lo sentimos, el plan buscado no existe");
-            return;
-        }
-        
-    }*/
-    
+    //Añade un nuevo cliente al mapa de clientes.
     public void addCliente(Cliente toAdd)
     {
         String rut = toAdd.getRut();
@@ -170,6 +139,7 @@ public class ManejoColecciones
         }
     }
     
+    //Añade un nuevo dispositivo al mapa de dispositivos.
     public void addDispositivo(Dispositivo toAdd){
         String nombre = toAdd.getNombre();
         
@@ -244,6 +214,7 @@ public class ManejoColecciones
         clientesCSV.close();
     }
     
+    //Exporta los clientes a un archivo clientes.csv
     public void exportClientes() throws FileNotFoundException, IOException{
         File delete = new File("clientes.csv");
         delete.delete();
@@ -289,6 +260,7 @@ public class ManejoColecciones
         planesCSV.close();
     }
     
+    //Exporta los planes a un archivos planes.csv
     public void exportPlanes() throws FileNotFoundException, IOException{
         File delete = new File("planes.csv");
         delete.delete();
@@ -314,6 +286,7 @@ public class ManejoColecciones
         nuevoPlanes.close();
     }
     
+    //Importa los prepagos de un archivo prepagos.csv
     public void importPrepago() throws FileNotFoundException, IOException{
         CSV prepagoCSV = new CSV("prepagos");
         String linea = prepagoCSV.firstLine();
@@ -334,6 +307,7 @@ public class ManejoColecciones
         prepagoCSV.close();
     }
     
+    //Exportar los prepagos a un archivo prepagos.csv
     public void exportPrepago() throws FileNotFoundException, IOException{
         File delete = new File("prepagos.csv");
         delete.delete();
@@ -357,6 +331,7 @@ public class ManejoColecciones
         nuevoPrepagos.close();
     }
     
+    //Importa los dispositivos de un archivos dispositivos.csv
     public void importDispositivos() throws FileNotFoundException, IOException {
         CSV dispositivosCSV = new CSV("dispositivos");
         String linea = dispositivosCSV.firstLine();
@@ -377,6 +352,7 @@ public class ManejoColecciones
         dispositivosCSV.close();
     }
     
+    //Exporta los dispositivos a un archivo dispositivos.csv
     public void exportDispositivos() throws FileNotFoundException, IOException{
         File delete = new File("dispositivos.csv");
         delete.delete();
@@ -419,6 +395,10 @@ public class ManejoColecciones
         }
     }
     
+<<<<<<< Updated upstream
+=======
+    //Se crea un nuevo prepago con parámetros insertados por el usuario.
+>>>>>>> Stashed changes
     public Prepago agregarNuevoPrepago(String telefono) throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Ingrese el saldo del teléfono:");
@@ -433,6 +413,7 @@ public class ManejoColecciones
         return p;
     }
     
+    //Permite editar los datos de un prepago.
     public void editarPrepago (Telefono t) throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Ingrese el nuevo saldo del teléfono:");
@@ -449,6 +430,7 @@ public class ManejoColecciones
         System.out.println("Prepago editado correctamente");
     }
     
+    //Cambia el plan de un teléfono insertado por el usuario.
     public void cambiarPlan(Telefono t) throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String opt = "0";
@@ -473,6 +455,7 @@ public class ManejoColecciones
         
     }
     
+    //Cambia el tipo de tarifa de un teléfono específico del cliente.
     public void switchTarifa(Telefono t) throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         if (t.getPlan() == null){
@@ -497,6 +480,7 @@ public class ManejoColecciones
         }
     }
     
+    //Permite editar el prepago o el tipo de tarifa de un cliente.
     public boolean editarTarifaCliente(String telefono, Cliente c) throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Telefono editTar = c.getTelefono(telefono);
@@ -536,6 +520,7 @@ public class ManejoColecciones
         return true;
     }
     
+    //Agregar, eliminar o editar un contrato.
     public void administrarContratos() throws IOException{
         if (clientesMap.isEmpty()){
             System.out.println("No existen clientes para editar!");
@@ -622,6 +607,7 @@ public class ManejoColecciones
         }
     }
     
+    //Crea una tabla con todos los teléfonos de un cliente con marca especificada por el usuario. 
     public String[][] importTablaMarca(String marca) throws TieneDispositivoException{
         int i = 0;
         String[][] t = new String[clientesMap.size()][3];
@@ -644,6 +630,7 @@ public class ManejoColecciones
         return t;
     }
     
+    //Crea una tabla con todos los teléfonos de un cliente con plan especificado por el usuario. 
     public String[][] importTablaPlan(String plan) throws NotTarifaException{
         int i = 0;
         String[][] t = new String[clientesMap.size()][3];
@@ -666,6 +653,7 @@ public class ManejoColecciones
         return t;
     }
     
+<<<<<<< Updated upstream
     public void mostrarClientesPlanes() throws IOException, NotTarifaException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int contTotal = 0;
@@ -757,6 +745,8 @@ public class ManejoColecciones
         }
     }
     
+=======
+>>>>>>> Stashed changes
     public void generarReporte(){
         
     }

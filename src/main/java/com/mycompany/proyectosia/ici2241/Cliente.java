@@ -30,6 +30,7 @@ public class Cliente {
         return nombre;
     }
     
+    //Retorna una tabla con todos los teléfonos del cliente y sus datos.
     public String[][] mostrarTodosLosTelefonos(){
         int i = 0;
         
@@ -60,11 +61,13 @@ public class Cliente {
         Telefono fonoTele = listaTelefonos.get(telefono);
         return fonoTele;
     }
-
+    
+    //Getter de RUT del cliente.
     public String getRut() {
         return rut;
     }
-
+    
+    //Getter de meses en la compañía del cliente.
     public int getTiempoEnMeses() {
         return tiempoEnMeses;
     }
@@ -73,19 +76,23 @@ public class Cliente {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    
+    //Setter de RUT del cliente.
     public void setRut(String rut) {
         this.rut = rut;
     }
-
+    
+    //Setter de RUT del cliente.
     public void setTiempoEnMeses(int tiempoEnMeses) {
         this.tiempoEnMeses = tiempoEnMeses;
     }
     
+    //Setter de RUT del cliente.
     public void setTiempoEnMeses(double tiempoEnMeses){
         this.tiempoEnMeses = (int) tiempoEnMeses;
     }
     
+    //Método que añade un telefono insertado por el usuario al cliente.
     public void addTelefono(Telefono toAdd, String numero){
         listaTelefonos.put(numero, toAdd);
     }
@@ -104,6 +111,7 @@ public class Cliente {
             return false;
     }
     
+    //Sobrecarga del método anterior.
     public boolean addPlan(String telefono, Plan toAdd)
     {
         if (listaTelefonos.containsKey(telefono))
@@ -133,6 +141,7 @@ public class Cliente {
         return null;
     }
     
+    //Método para eliminar un telefono al cliente.
     public boolean eliminarTelefono(String telefono){
         Telefono t = this.getTelefono(telefono);
         if (t == null){
@@ -142,6 +151,7 @@ public class Cliente {
         return true;
     }
     
+    //Método para exportar los telefonos de un cliente al CSV.
     public void exportTelefonos(FileWriter csv) throws IOException{
         //Se recibe el archivo ya abierto}
         //Primero guardamos cada telefono con sus datos para así evitar un desorden al exportarlos
@@ -182,6 +192,7 @@ public class Cliente {
         csv.append("\"");
     }
     
+    //Método que muestra los planes de cada teléfono del cliente.
     public void mostrarPlanes()
     {
         try{
@@ -201,6 +212,7 @@ public class Cliente {
         }
     }
     
+    //Muestra los datos de un cliente, incluyendo su lista de teléfonos.
     public void mostrarDatos(String a){
         System.out.println("----------------------");
         System.out.println("Nombre: "+this.getNombre());
@@ -212,12 +224,14 @@ public class Cliente {
         }
     }
     
+    //Sobrecarga del método anterior, sin mostrar la lista de teléfonos.
     public void mostrarDatos(int a){
         System.out.println("Nombre: "+this.getNombre());
         System.out.println("RUT: "+this.getRut());
         System.out.println("Tiempo que lleva en la compañia: "+this.getTiempoEnMeses()+" meses");
     }
     
+    //Muestra los datos de un teléfono del cliente.
     public void mostrarDatosTelefono(String toShow){
         if (!listaTelefonos.containsKey(toShow)){
             System.out.println("Número ingresado no existe en cliente "+rut);
@@ -241,16 +255,19 @@ public class Cliente {
         System.out.println("Dispositivo contratado: "+t.getDevice().getNombre());
     }
     
+    //Crea un nuevo contrato de teléfono con plan.
     public void crearNuevoContrato(String telefono, Plan p, Dispositivo d){
         Telefono nuevo = new Telefono(telefono, d, p);
         this.addTelefono(nuevo, telefono);
     }
     
+    //Crea un nuevo contrato de teléfono con prepago. (Sobrecarga)
     public void crearNuevoContrato(String telefono, Prepago p, Dispositivo d){
         Telefono nuevo = new Telefono(telefono, d, p);
         this.addTelefono(nuevo, telefono);
     }
     
+    //Busca los teléfonos de marca indicada por el usuario, para ventanas Swing.
     public String buscarMarcaEnTelefonoSwing(String marca) throws TieneDispositivoException{
         if (listaTelefonos.isEmpty()){
             return "";
@@ -271,6 +288,7 @@ public class Cliente {
         return telefonos;
     }
     
+    //Busca los teléfonos con plan indicado por el usuario, para ventanas Swing.
     public String buscarPlanEnTelefonoSwing(String plan) throws NotTarifaException{
         if (listaTelefonos.isEmpty()){
             return "";
@@ -293,6 +311,7 @@ public class Cliente {
         return telefonos;
     }
     
+    //Busca los teléfonos de plan indicado por el usuario, para consola.
     public boolean buscarPlanEnTelefono(String plan) throws NotTarifaException{
         int cont = 0;
         for (Telefono iterator: listaTelefonos.values()){

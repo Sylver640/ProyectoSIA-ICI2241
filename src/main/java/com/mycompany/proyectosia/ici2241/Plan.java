@@ -99,6 +99,7 @@ public class Plan extends Tarifa{
         return SMS;
     }
     
+    //Muestra los detalles de la tarifa (sobreescritura).
     @Override
     public void mostrarDetallesTarifa(){
         System.out.println("Nombre: "+getNombre());

@@ -7,7 +7,6 @@ package com.mycompany.proyectosia.ici2241.ventanas;
 
 import com.mycompany.proyectosia.ici2241.ManejoColecciones;
 import com.mycompany.proyectosia.ici2241.NotTarifaException;
-import com.mycompany.proyectosia.ici2241.TieneDispositivoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;

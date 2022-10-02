@@ -14,14 +14,14 @@ public class JavaMain
         //BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
         //String ingresado;
         //int opt = 1;
-        ManejoColecciones colHandle = new ManejoColecciones();
-        colHandle.importPlanes();
-        colHandle.importPrepago();
-        colHandle.importDispositivos();
-        colHandle.importClientes();
+        ManejoColecciones colHandle = new ManejoColecciones(); //Instancia de ManejoColecciones.
+        colHandle.importPlanes(); //Importación de planes.
+        colHandle.importPrepago(); //Importación de prepagos.
+        colHandle.importDispositivos(); //Importación de dispositivos.
+        colHandle.importClientes(); //Importación de clientes.
         
         VentanaPrincipal vp = new VentanaPrincipal(colHandle);
-        vp.setVisible(true);
+        vp.setVisible(true); //Se crea y visibiliza la ventana del menú principal. 
         
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
