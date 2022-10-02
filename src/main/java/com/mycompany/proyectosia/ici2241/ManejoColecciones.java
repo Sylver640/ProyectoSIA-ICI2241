@@ -64,6 +64,26 @@ public class ManejoColecciones
         }
     }
     
+    public String[][] generarTabla(){
+        int i = 0;
+        
+        String[][] tabla =new String[clientesMap.size()][3];
+        
+        if(clientesMap.entrySet() == null){
+            return tabla;
+        }
+        
+        for (Map.Entry<String, Cliente> entry: clientesMap.entrySet()){
+            Cliente cliente = entry.getValue();
+            tabla[i][0] = cliente.getNombre();
+            tabla[i][1] = cliente.getRut();
+            tabla[i][2] = "" + cliente.getTiempoEnMeses(); 
+            i+=1;
+        }
+        
+        return tabla;
+    } 
+    
     //Método para crear un nuevo plan a partir de la opción 1 en el menú.
     /*public void addManualPlan() throws IOException{ 
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
@@ -601,7 +621,7 @@ public class ManejoColecciones
         }
     }
     
-    public void mostrarClientesMarca() throws IOException{
+    public void mostrarClientesMarca() throws IOException, TieneDispositivoException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int contTotal = 0;
         System.out.println("Ingrese la marca a buscar:");
@@ -669,7 +689,7 @@ public class ManejoColecciones
         System.out.println("----------------------");
     }
     
-    public void filtrarClientes() throws IOException, NotTarifaException{
+    public void filtrarClientes() throws IOException, NotTarifaException, TieneDispositivoException{
         if (clientesMap.isEmpty()){
             System.out.println("No existen clientes para listar!");
             return;
