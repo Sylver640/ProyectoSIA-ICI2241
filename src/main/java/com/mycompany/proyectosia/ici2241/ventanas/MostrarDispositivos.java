@@ -20,6 +20,7 @@ public class MostrarDispositivos extends javax.swing.JFrame {
         ventanaPrincipal = padre;
         this.colHandle = colHandle;
         initComponents();
+        this.setLocationRelativeTo(null);
         try {
             importTabla();
         } catch (IOException ex) {
