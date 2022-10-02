@@ -7,7 +7,7 @@ import java.io.*;
  */
 public class JavaMain 
 {
-    public static void main(String[] args) throws IOException 
+    public static void main(String[] args) throws IOException, NotTarifaException 
     {
         //Se presume que quien usarío esta aplicación es una empresa, por lo que no existe un inicio de sesión
         //Variables de lectura
