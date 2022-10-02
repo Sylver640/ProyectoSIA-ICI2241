@@ -271,6 +271,33 @@ public class Cliente {
         return true;
     }
     
+    public String[][] buscarMarcaEnTelefonoSwing(String marcaS) throws TieneDispositivoException{
+        int i = 0;
+        String[][] marcaF = new String[listaTelefonos.size()][4]; 
+        
+        if(listaTelefonos.entrySet() == null){
+            return marcaF;
+        }
+        
+        for (Map.Entry<String, Telefono> entry: listaTelefonos.entrySet()){
+            Telefono tel = entry.getValue();
+            try{
+                if(tel.getDevice().getMarca().equals(marcaF)){
+                    marcaF[i][0] = getNombre();
+                    marcaF[i][1] = getRut();
+                    marcaF[i][2] = tel.getNumero();
+                    marcaF[i][3] = tel.getDevice().getNombre();
+                    i+=1;
+                }
+            } catch(NullPointerException a){
+                throw new TieneDispositivoException();
+            }
+            
+        }
+        
+        return marcaF;
+    }
+    
     public boolean buscarPlanEnTelefono(String plan) throws NotTarifaException{
         int cont = 0;
         for (Telefono iterator: listaTelefonos.values()){
