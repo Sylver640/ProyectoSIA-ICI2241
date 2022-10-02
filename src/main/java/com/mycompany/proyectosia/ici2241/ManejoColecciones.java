@@ -1,8 +1,6 @@
 package com.mycompany.proyectosia.ici2241;
 import java.util.*;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ManejoColecciones 
 {
@@ -421,46 +419,6 @@ public class ManejoColecciones
         }
     }
     
-    public void mostrarInfoClientes() throws IOException{
-        if (clientesMap.isEmpty()){
-            System.out.println("No se encontraron clientes");
-            return;
-        }
-        
-        BufferedReader reader = new BufferedReader (new InputStreamReader (System.in));
-        
-        String opt = "";
-        
-        while (!opt.equals("0")){
-            System.out.println("Ingrese una opción:");
-            System.out.println("(2) Mostrar información de un cliente");
-            System.out.println("(0) Volver al menú principal");
-            opt = reader.readLine();
-            
-            switch (opt){
-                case "2": System.out.println("Ingrese el RUT del cliente: ");
-                          String toShow = reader.readLine();
-                          Cliente c = getCliente(toShow);
-                          if (c != null){
-                              c.mostrarDatos("a");
-                              System.out.println("Desea ver los datos de algún teléfono? (s/n)");
-                              String fonoData = reader.readLine();
-                              if (fonoData.equals("s")){
-                                  System.out.println("Ingrese el número: ");
-                                  fonoData = reader.readLine();
-                                  c.mostrarDatosTelefono(fonoData);
-                              }
-                              System.out.println("----------------------\n");
-                          }
-                          else{
-                              System.out.println("El cliente ingresado no existe\n");
-                          }
-                          break;
-                          
-            }
-        }
-    }
-    
     public Prepago agregarNuevoPrepago(String telefono) throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Ingrese el saldo del teléfono:");
@@ -730,9 +688,30 @@ public class ManejoColecciones
         System.out.println("----------------------");
     }
     
+    public String[][] generarTablaTiempo(int tiempo){
+        int i = 0;
+        String[][] t = new String[clientesMap.size()][3];
+        
+        if (clientesMap.entrySet() == null){
+            return t;
+        }
+        
+        for (Map.Entry<String, Cliente> entry: clientesMap.entrySet()){
+            Cliente clienteConMarca = entry.getValue();
+            if (clienteConMarca.getTiempoEnMeses() >= tiempo){
+                t[i][0] = clienteConMarca.getNombre();
+                t[i][1] = clienteConMarca.getRut();
+                t[i][2] = ""+clienteConMarca.getTiempoEnMeses();
+            }
+            i++;
+        }
+        
+        return t;
+    }
+    
     public void mostrarClientesMeses() throws IOException{
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int contTotal = 0;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Ingrese la cantidad de meses:");
         int showMeses = Integer.parseInt(reader.readLine());
         

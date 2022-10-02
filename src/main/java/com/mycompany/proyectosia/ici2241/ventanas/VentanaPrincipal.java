@@ -252,6 +252,9 @@ public class VentanaPrincipal extends javax.swing.JFrame{
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // Filtrar clientes por tiempo en la compañía.
+        FiltrarTiempo mostrar = new FiltrarTiempo(this, colHandle);
+        mostrar.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton10ActionPerformed
 
 
