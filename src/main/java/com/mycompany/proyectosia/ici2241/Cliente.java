@@ -31,7 +31,7 @@ public class Cliente {
     public String[][] mostrarTodosLosTelefonos(){
         int i = 0;
         
-        String[][] t = new String[listaTelefonos.size()][2];
+        String[][] t = new String[listaTelefonos.size()][3];
         
         if(listaTelefonos.entrySet() == null){
             return t;
@@ -46,6 +46,7 @@ public class Cliente {
             if(tel.getPrepago() == null){
                 t[i][1] = "Plan";
             }
+            t[i][2] = tel.getDevice().getNombre();
             i+=1;
         }
         
