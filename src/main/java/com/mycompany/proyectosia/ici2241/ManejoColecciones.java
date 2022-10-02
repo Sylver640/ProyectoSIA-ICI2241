@@ -624,17 +624,52 @@ public class ManejoColecciones
         System.out.println("----------------------");
     }
     
-    public void mostrarClientesPlanes() throws IOException{
+    public void mostrarClientesPlanes() throws IOException, NotTarifaException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        int cont = 0;
+        int contTotal = 0;
+        System.out.println("Ingrese el plan a buscar:");
+        String showPlan = reader.readLine();
+        
+        System.out.println("----------------------");
+        
+        for (Cliente iterator: clientesMap.values()){
+            if (iterator.buscarPlanEnTelefono(showPlan)){
+                contTotal++;
+            }
+        }
+        
+        if (contTotal == 0){
+            System.out.println("Ningún cliente tiene contratado este plan!");
+        }
+        
+        System.out.println("Se ha(n) encontrado "+contTotal+" cliente(s) con teléfonos que tienen contratados este plan!");
+        System.out.println("----------------------");
     }
     
     public void mostrarClientesMeses() throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        int cont = 0;
+        int contTotal = 0;
+        System.out.println("Ingrese la cantidad de meses:");
+        int showMeses = Integer.parseInt(reader.readLine());
+        
+        System.out.println("----------------------");
+        
+        for (Cliente iterator: clientesMap.values()){
+            if (iterator.getTiempoEnMeses() >= showMeses){
+                System.out.println("Cliente "+iterator.getRut()+ " lleva "+ iterator.getTiempoEnMeses() + " meses en la compañia");
+                contTotal++;
+            }
+        }
+        
+        if (contTotal == 0){
+            System.out.println("Ningún cliente lleva más de "+ showMeses + " meses en la compañia");
+        }
+        
+        System.out.println("Se ha(n) encontrado "+contTotal+" cliente(s) que llevan más de "+showMeses+" meses en la compañia!");
+        System.out.println("----------------------");
     }
     
-    public void filtrarClientes() throws IOException{
+    public void filtrarClientes() throws IOException, NotTarifaException{
         if (clientesMap.isEmpty()){
             System.out.println("No existen clientes para listar!");
             return;
@@ -660,10 +695,6 @@ public class ManejoColecciones
                           break;
             }
         }
-    }
-    
-    public void administrarPlanes(){
-        
     }
     
     public void generarReporte(){
