@@ -7,7 +7,6 @@ package com.mycompany.proyectosia.ici2241.ventanas;
 
 import com.mycompany.proyectosia.ici2241.Dispositivo;
 import com.mycompany.proyectosia.ici2241.ManejoColecciones;
-import com.mycompany.proyectosia.ici2241.Resultados;
 import javax.swing.JFrame;
 
 /**
@@ -123,7 +122,7 @@ public class FiltrarMarca extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String marca = jTextField1.getText();
-        Resultados res = new Resultados(ventanaPrincipal, colHandle, marca);
+        ResultadosMarca res = new ResultadosMarca(ventanaPrincipal, colHandle, marca);
         res.setVisible(true);
         
 

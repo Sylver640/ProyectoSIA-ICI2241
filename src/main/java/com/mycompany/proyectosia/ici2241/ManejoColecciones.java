@@ -760,6 +760,12 @@ public class ManejoColecciones
         }
     }
     
+    public String[][] importTablaMarca(String marca){
+        String[][] t = new String[15][4](); //???
+        
+        return t;
+    }
+    
     public void generarReporte(){
         
     }

@@ -273,26 +273,32 @@ public class Cliente {
     
     public String[][] buscarMarcaEnTelefonoSwing(String marcaS) throws TieneDispositivoException{
         int i = 0;
-        String[][] marcaF = new String[listaTelefonos.size()][4]; 
-        
-        if(listaTelefonos.entrySet() == null){
-            return marcaF;
-        }
+        ArrayList<Telefono> numerosGuard = new ArrayList<Telefono>();
         
         for (Map.Entry<String, Telefono> entry: listaTelefonos.entrySet()){
             Telefono tel = entry.getValue();
             try{
-                if(tel.getDevice().getMarca().equals(marcaF)){
-                    marcaF[i][0] = getNombre();
-                    marcaF[i][1] = getRut();
-                    marcaF[i][2] = tel.getNumero();
-                    marcaF[i][3] = tel.getDevice().getNombre();
-                    i+=1;
+                if(tel.getDevice().getMarca().equals(marcaS)){
+                    numerosGuard.add(tel);
                 }
             } catch(NullPointerException a){
                 throw new TieneDispositivoException();
             }
             
+        }
+                
+        String[][] marcaF = new String[numerosGuard.size()][4];
+        
+        if(listaTelefonos.entrySet() == null){
+            return marcaF;
+        }
+        
+        for (i = 0; i < numerosGuard.size(); i++){
+            marcaF[i][0] = getNombre();
+            marcaF[i][1] = getRut();
+            marcaF[i][2] = numerosGuard.get(i).getNumero();
+            marcaF[i][3] = numerosGuard.get(i).getDevice().getNombre();
+            i+=1;
         }
         
         return marcaF;

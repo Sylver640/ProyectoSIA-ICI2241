@@ -3,26 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.proyectosia.ici2241;
+package com.mycompany.proyectosia.ici2241.ventanas;
 
+import com.mycompany.proyectosia.ici2241.ManejoColecciones;
 import javax.swing.JFrame;
 
 /**
  *
  * @author vicen
  */
-public class Resultados extends javax.swing.JFrame {
+public class ResultadosMarca extends javax.swing.JFrame {
     JFrame ventanaPrincipal;
     ManejoColecciones colHandle;
     /**
      * Creates new form ResultadosMarca
      */
-    public Resultados(JFrame padre, ManejoColecciones colHandle, String criterio) {
+    public ResultadosMarca(JFrame padre, ManejoColecciones colHandle, String marca) {
         ventanaPrincipal = padre;
         this.colHandle = colHandle;
         initComponents();
         this.setLocationRelativeTo(null);
-        initComponents();
+        String[][] tabla = colHandle.importTablaMarca(marca);
     }
 
     /**
@@ -42,7 +43,7 @@ public class Resultados extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Los clientes que poseen su criterio insertado son:");
+        jLabel1.setText("Los clientes que poseen su marca insertada son:");
 
         jButton1.setText("Listo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
