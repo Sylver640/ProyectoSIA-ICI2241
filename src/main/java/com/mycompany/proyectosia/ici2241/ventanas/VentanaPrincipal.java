@@ -181,6 +181,7 @@ public class VentanaPrincipal extends javax.swing.JFrame{
             colHandle.exportPlanes();
             colHandle.exportPrepago();
             colHandle.exportDispositivos();
+            colHandle.exportClientes();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

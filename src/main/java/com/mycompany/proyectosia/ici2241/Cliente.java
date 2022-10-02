@@ -1,4 +1,6 @@
 package com.mycompany.proyectosia.ici2241;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Cliente {
@@ -138,6 +140,46 @@ public class Cliente {
         }
         listaTelefonos.remove(telefono);
         return true;
+    }
+    
+    public void exportTelefonos(FileWriter csv) throws IOException{
+        //Se recibe el archivo ya abierto}
+        //Primero guardamos cada telefono con sus datos para así evitar un desorden al exportarlos
+        ArrayList<String> numeros = new ArrayList<String>();
+        ArrayList<String> tarifas = new ArrayList<String>();
+        ArrayList<String> nombreCelus = new ArrayList<String>();
+        
+        for (Telefono iterator: listaTelefonos.values()){
+            numeros.add(iterator.getNumero());
+            nombreCelus.add(iterator.getDevice().getNombre());
+            if (iterator.getPlan() == null){
+                tarifas.add("Prepago");
+            } else{
+                tarifas.add(iterator.getPlan().getNombre());
+            }
+        }
+        
+        //Ahora sí, tan solo recorremos cada lista y vamos copiando cada valor en el CSV
+        csv.append("\"");
+        for (int i = 0; i < numeros.size(); i++){
+            csv.append(numeros.get(i));
+            csv.append(",");
+        }
+        csv.append("\"");
+        csv.append(",");
+        csv.append("\"");
+        for (int i = 0; i < tarifas.size(); i++){
+            csv.append(tarifas.get(i));
+            csv.append(",");
+        }
+        csv.append("\"");
+        csv.append(",");
+        csv.append("\"");
+        for (int i = 0; i < nombreCelus.size(); i++){
+            csv.append(nombreCelus.get(i));
+            csv.append(",");
+        }
+        csv.append("\"");
     }
     
     public void mostrarPlanes()

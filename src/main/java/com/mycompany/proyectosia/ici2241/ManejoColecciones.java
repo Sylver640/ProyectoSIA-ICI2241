@@ -246,6 +246,27 @@ public class ManejoColecciones
         clientesCSV.close();
     }
     
+    public void exportClientes() throws FileNotFoundException, IOException{
+        File delete = new File("clientes.csv");
+        delete.delete();
+        
+        FileWriter nuevoClientes = new FileWriter("clientes.csv");
+        
+        for (Cliente iterator: clientesMap.values()){
+            nuevoClientes.append(iterator.getRut());
+            nuevoClientes.append(",");
+            nuevoClientes.append(iterator.getNombre());
+            nuevoClientes.append(",");
+            nuevoClientes.append(""+iterator.getTiempoEnMeses());
+            nuevoClientes.append(",");
+            iterator.exportTelefonos(nuevoClientes);
+            nuevoClientes.append("\n");
+        }
+        
+        nuevoClientes.flush();
+        nuevoClientes.close();
+    }
+    
     //Método para la lectura del archivo planes.csv ubicado en la carpeta raiz del programa
     public void importPlanes() throws FileNotFoundException, IOException
     {
