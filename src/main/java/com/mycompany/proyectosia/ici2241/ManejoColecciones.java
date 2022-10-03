@@ -75,13 +75,14 @@ public class ManejoColecciones
     public String[][] mostrarTodosLosClientes(){
         int i = 0;
         
-        String[][] tabla =new String[clientesMap.size()][3];
+        String[][] tabla =new String[clientesMap.size()][3]; //Se crea una matriz de Strings.
         
-        if(clientesMap.entrySet() == null){
+        if(clientesMap.entrySet() == null){ //Si no existen clientes, se retorna la matriz vacía.
             return tabla;
         }
         
-        for (Map.Entry<String, Cliente> entry: clientesMap.entrySet()){
+        for (Map.Entry<String, Cliente> entry: clientesMap.entrySet()){ //Se consiguen los datos de cada cliente en el mapa de clientes.
+                                                                        //Y se insertan en la matriz
             Cliente cliente = entry.getValue();
             tabla[i][0] = cliente.getNombre();
             tabla[i][1] = cliente.getRut();
@@ -89,20 +90,21 @@ public class ManejoColecciones
             i+=1;
         }
         
-        return tabla;
+        return tabla; //Se retorna la matriz con los datos conseguidos.
     }
     
     //Retorna una tabla con todos los dispositivos y sus datos.
     public String [][] mostrarDispositivos(){
         int i = 0;
         
-        String[][] tabla = new String[celuMap.size()][7];
+        String[][] tabla = new String[celuMap.size()][7]; //Se crea una matriz de Strings.
         
-        if (celuMap.entrySet() == null){
+        if (celuMap.entrySet() == null){ //Si no existen dispositivos, se retorna la matriz vacía.
             return tabla;
         }
         
-        for (Map.Entry<String, Dispositivo> entry: celuMap.entrySet()){
+        for (Map.Entry<String, Dispositivo> entry: celuMap.entrySet()){ //Se consiguen los datos de cada cliente en el mapa de clientes.
+                                                                        //Y se insertan en la matriz.
             Dispositivo celu = entry.getValue();
             tabla[i][0] = celu.getNombre();
             tabla[i][1] = celu.getMarca();
@@ -117,7 +119,7 @@ public class ManejoColecciones
         return tabla;
     }
     
-    //Aañade un prepago al mapa de prepagos.
+    //Añade un prepago al mapa de prepagos.
     public void addPrepago (Prepago toAdd){
         String numeroVinculado = toAdd.getNombre();
         
@@ -488,7 +490,7 @@ public class ManejoColecciones
             return false;
         }
         
-        //El menú se diferencia según
+        //El menú se diferencia según si el teléfono especificado contiene un prepago o un plan.
         if (editTar.getPlan() == null && editTar.getPrepago() != null){
             System.out.println("El teléfono "+editTar.getNumero()+" está contratado como prepago");
             System.out.println("Qué desea hacer?");
@@ -613,16 +615,16 @@ public class ManejoColecciones
     //Crea una tabla con todos los teléfonos de un cliente con marca especificada por el usuario. 
     public String[][] importTablaMarca(String marca) throws TieneDispositivoException{
         int i = 0;
-        String[][] t = new String[clientesMap.size()][3];
+        String[][] t = new String[clientesMap.size()][3]; //Se crea una nueva matriz
         
         if (clientesMap.entrySet() == null){
             return t;
         }
         
         for (Map.Entry<String, Cliente> entry: clientesMap.entrySet()){
-            Cliente clienteConMarca = entry.getValue();
-            String telefonosConMarca = clienteConMarca.buscarMarcaEnTelefonoSwing(marca);
-            if (!telefonosConMarca.equals("")){
+            Cliente clienteConMarca = entry.getValue(); //Por cada cliente se consigue sus datos.
+            String telefonosConMarca = clienteConMarca.buscarMarcaEnTelefonoSwing(marca); //Se verifica si posee la marca en sus teléfonos.
+            if (!telefonosConMarca.equals("")){ //Si se encuentra la marca, se añaden los datos del cliente a la matriz.
                 t[i][0] = clienteConMarca.getNombre();
                 t[i][1] = clienteConMarca.getRut();
                 t[i][2] = telefonosConMarca;
@@ -643,9 +645,9 @@ public class ManejoColecciones
         }
         
         for (Map.Entry<String, Cliente> entry: clientesMap.entrySet()){
-            Cliente clienteConPlan = entry.getValue();
-            String telefonosConPlan= clienteConPlan.buscarPlanEnTelefonoSwing(plan);
-            if (!telefonosConPlan.equals("")){
+            Cliente clienteConPlan = entry.getValue(); //Por cada cliente se consigue sus datos.
+            String telefonosConPlan= clienteConPlan.buscarPlanEnTelefonoSwing(plan); //Se verifica si posee el plan en sus teléfonos.
+            if (!telefonosConPlan.equals("")){ //Si se encuentra la marca, se añaden los datos del cliente a la matriz.
                 t[i][0] = clienteConPlan.getNombre();
                 t[i][1] = clienteConPlan.getRut();
                 t[i][2] = telefonosConPlan;
@@ -653,29 +655,29 @@ public class ManejoColecciones
             i++;
         }
         
-        return t;
+        return t; //Se retorna la matriz con los datos.
     }
     
     //Método para retornar una tabla con los clientes que cumplan el requerimiento de meses
     public String[][] generarTablaTiempo(int tiempo){
         int i = 0;
-        String[][] t = new String[clientesMap.size()][3];
+        String[][] t = new String[clientesMap.size()][3]; //Se crea una matriz de Strings.
         
-        if (clientesMap.entrySet() == null){
+        if (clientesMap.entrySet() == null){ //Si el mapa de clientes está vacío, se retorna la matriz vacía.
             return t;
         }
         
         for (Map.Entry<String, Cliente> entry: clientesMap.entrySet()){
-            Cliente clienteConMarca = entry.getValue();
-            if (clienteConMarca.getTiempoEnMeses() >= tiempo){
-                t[i][0] = clienteConMarca.getNombre();
+            Cliente clienteConMarca = entry.getValue(); //Por cada cliente se consigue sus datos.
+            if (clienteConMarca.getTiempoEnMeses() >= tiempo){ //Se verifica si el cliente pertenece al rango de tiempo impuesto.
+                t[i][0] = clienteConMarca.getNombre(); //Si es así, se añaden los datos del cliente a la matriz.
                 t[i][1] = clienteConMarca.getRut();
                 t[i][2] = ""+clienteConMarca.getTiempoEnMeses();
             }
             i++;
         }
         
-        return t;
+        return t; //Se retorna la matriz con los datos.
     }
     
     //Método para generar un reporte de clientes en el momento actual de ejecución
