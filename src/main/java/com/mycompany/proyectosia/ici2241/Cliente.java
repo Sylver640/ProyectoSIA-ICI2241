@@ -311,27 +311,10 @@ public class Cliente {
         return telefonos;
     }
     
-    //Busca los teléfonos de plan indicado por el usuario, para consola.
-    public boolean buscarPlanEnTelefono(String plan) throws NotTarifaException{
-        int cont = 0;
+    //Método para incluir teléfonos de un cliente en reporte
+    public void reporteTelefonos(FileWriter reporte) throws IOException{
         for (Telefono iterator: listaTelefonos.values()){
-            try{
-                if (iterator.getPlan() != null){
-                    if (iterator.getPlan().getNombre().equals(plan)){
-                        System.out.println("Cliente " + getRut() + " con teléfono "+iterator.getNumero()+" tiene contratado/a el plan "+plan);
-                        cont++;
-                    }
-                }
-            }
-            catch (NullPointerException a){
-                throw new NotTarifaException();
-            }
-            
+            reporte.append(" "+iterator.getNumero());
         }
-        
-        if (cont == 0)
-            return false;
-        
-        return true;
     }
 }

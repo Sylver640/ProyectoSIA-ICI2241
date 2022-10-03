@@ -682,8 +682,15 @@ public class ManejoColecciones
     public void generarReporteDeClientes() throws IOException{
         FileWriter nuevoReporte = new FileWriter("reporte.csv");
         
+        nuevoReporte.append("Nombre, RUT del cliente, Teléfonos");
+        
         for (Cliente iterator: clientesMap.values()){
-            
+            nuevoReporte.append(iterator.getNombre());
+            nuevoReporte.append(", ");
+            nuevoReporte.append(iterator.getRut());
+            nuevoReporte.append(",");
+            iterator.reporteTelefonos(nuevoReporte);
+            nuevoReporte.append("\n");
         }
         
         nuevoReporte.flush();
