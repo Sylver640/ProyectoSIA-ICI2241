@@ -28,6 +28,7 @@ public class JavaMain
         if (ingresado.equals("s")){
             while (opt != 0){
                 System.out.println("(1) Administrar contratos");
+                System.out.println("(2) Generar reporte de clientes");
                 System.out.println("(0) Salir");
                 System.out.println("Ingrese una opción:");
                 opt = Integer.parseInt(lector.readLine());
@@ -35,6 +36,7 @@ public class JavaMain
                 switch (opt){
                     case 1: colHandle.administrarContratos();
                             break;
+                    case 2: colHandle.generarReporteDeClientes();
                     case 0: colHandle.exportPrepago();
                             colHandle.exportPlanes();
                             colHandle.exportDispositivos();

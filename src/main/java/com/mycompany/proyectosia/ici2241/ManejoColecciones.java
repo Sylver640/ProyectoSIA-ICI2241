@@ -488,6 +488,7 @@ public class ManejoColecciones
             return false;
         }
         
+        //El menú se diferencia según
         if (editTar.getPlan() == null && editTar.getPrepago() != null){
             System.out.println("El teléfono "+editTar.getNumero()+" está contratado como prepago");
             System.out.println("Qué desea hacer?");
@@ -522,6 +523,7 @@ public class ManejoColecciones
     
     //Agregar, eliminar o editar un contrato.
     public void administrarContratos() throws IOException{
+        //Si no hay clientes, se retorna
         if (clientesMap.isEmpty()){
             System.out.println("No existen clientes para editar!");
             return;
@@ -531,13 +533,14 @@ public class ManejoColecciones
         System.out.println("Ingrese el RUT de un cliente: ");
         String toEdit = reader.readLine();
         
+        //Si el cliente no se encuentra, se retorna
         Cliente c = this.getCliente(toEdit);
         if (c == null){
             System.out.println("Cliente no encontrado");
             return;
         }
         System.out.println("\n");
-        c.mostrarDatos(0);
+        c.mostrarDatos(0); //Se muestran los datos del cliente
         String opt = "";
         
         
@@ -652,29 +655,8 @@ public class ManejoColecciones
         
         return t;
     }
-   
-    public void mostrarClientesPlanes() throws IOException, NotTarifaException{
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        int contTotal = 0;
-        System.out.println("Ingrese el plan a buscar:");
-        String showPlan = reader.readLine();
-        
-        System.out.println("----------------------");
-        
-        for (Cliente iterator: clientesMap.values()){
-            if (iterator.buscarPlanEnTelefono(showPlan)){
-                contTotal++;
-            }
-        }
-        
-        if (contTotal == 0){
-            System.out.println("Ningún cliente tiene contratado este plan!");
-        }
-        
-        System.out.println("Se ha(n) encontrado "+contTotal+" cliente(s) con teléfonos que tienen contratados este plan!");
-        System.out.println("----------------------");
-    }
     
+    //Método para retornar una tabla con los clientes que cumplan el requerimiento de meses
     public String[][] generarTablaTiempo(int tiempo){
         int i = 0;
         String[][] t = new String[clientesMap.size()][3];
@@ -696,55 +678,16 @@ public class ManejoColecciones
         return t;
     }
     
-    public void mostrarClientesMeses() throws IOException{
-        int contTotal = 0;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Ingrese la cantidad de meses:");
-        int showMeses = Integer.parseInt(reader.readLine());
-        
-        System.out.println("----------------------");
+    //Método para generar un reporte de clientes en el momento actual de ejecución
+    public void generarReporteDeClientes() throws IOException{
+        FileWriter nuevoReporte = new FileWriter("reporte.csv");
         
         for (Cliente iterator: clientesMap.values()){
-            if (iterator.getTiempoEnMeses() >= showMeses){
-                System.out.println("Cliente "+iterator.getRut()+ " lleva "+ iterator.getTiempoEnMeses() + " meses en la compañia");
-                contTotal++;
-            }
-        }
-        
-        if (contTotal == 0){
-            System.out.println("Ningún cliente lleva más de "+ showMeses + " meses en la compañia");
-        }
-        
-        System.out.println("Se ha(n) encontrado "+contTotal+" cliente(s) que llevan más de "+showMeses+" meses en la compañia!");
-        System.out.println("----------------------");
-    }
-    
-    public void filtrarClientes() throws IOException, NotTarifaException, TieneDispositivoException{
-        if (clientesMap.isEmpty()){
-            System.out.println("No existen clientes para listar!");
-            return;
-        }
-        
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String opt = "";
-        
-        while (!opt.equals("0")){
-            System.out.println("Qué desea realizar?");
-            System.out.println("(1) Seleccionar clientes que tengan cierto plan contratado");
-            System.out.println("(2) Mostrar clientes que lleven más de ciertos meses determinados");
-            System.out.println("(0) Volver al menú principal");
-            opt = reader.readLine();
             
-            switch (opt){
-                case "1": this.mostrarClientesPlanes();
-                          break;
-                case "2": this.mostrarClientesMeses();
-                          break;
-            }
         }
-    }
-    
-    public void generarReporte(){
         
+        nuevoReporte.flush();
+        nuevoReporte.close();
+        System.out.println("Reporte generado con éxito\n");
     }
 }
