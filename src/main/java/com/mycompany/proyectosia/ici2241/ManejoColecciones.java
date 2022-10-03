@@ -685,6 +685,7 @@ public class ManejoColecciones
         FileWriter nuevoReporte = new FileWriter("reporte.csv");
         
         nuevoReporte.append("Nombre, RUT del cliente, Teléfonos");
+        nuevoReporte.append("\n");
         
         for (Cliente iterator: clientesMap.values()){
             nuevoReporte.append(iterator.getNombre());
