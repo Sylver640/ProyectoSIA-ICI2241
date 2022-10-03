@@ -30,32 +30,6 @@ public class Cliente {
         return nombre;
     }
     
-    //Retorna una tabla con todos los teléfonos del cliente y sus datos.
-    public String[][] mostrarTodosLosTelefonos(){
-        int i = 0;
-        
-        String[][] t = new String[listaTelefonos.size()][3];
-        
-        if(listaTelefonos.entrySet() == null){
-            return t;
-        }
-        
-        for (Map.Entry<String, Telefono> entry: listaTelefonos.entrySet()){
-            Telefono tel = entry.getValue();
-            t[i][0] = tel.getNumero();
-            if(tel.getPlan() == null){
-                t[i][1] = "Prepago";
-            }
-            if(tel.getPrepago() == null){
-                t[i][1] = "Plan";
-            }
-            t[i][2] = tel.getDevice().getNombre();
-            i+=1;
-        }
-        
-        return t;
-    }
-    
     //Getter para un telefono especificado.
     public Telefono getTelefono(String telefono){
         Telefono fonoTele = listaTelefonos.get(telefono);
@@ -190,6 +164,32 @@ public class Cliente {
             csv.append(",");
         }
         csv.append("\"");
+    }
+    
+    //Retorna una tabla con todos los teléfonos del cliente y sus datos.
+    public String[][] mostrarTodosLosTelefonos(){
+        int i = 0;
+        
+        String[][] t = new String[listaTelefonos.size()][3];
+        
+        if(listaTelefonos.entrySet() == null){
+            return t;
+        }
+        
+        for (Map.Entry<String, Telefono> entry: listaTelefonos.entrySet()){
+            Telefono tel = entry.getValue();
+            t[i][0] = tel.getNumero();
+            if(tel.getPlan() == null){
+                t[i][1] = "Prepago";
+            }
+            if(tel.getPrepago() == null){
+                t[i][1] = "Plan";
+            }
+            t[i][2] = tel.getDevice().getNombre();
+            i+=1;
+        }
+        
+        return t;
     }
     
     //Método que muestra los planes de cada teléfono del cliente.

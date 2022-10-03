@@ -4,6 +4,7 @@ package com.mycompany.proyectosia.ici2241;
  @author Rodrigo Araos
  */
 public class Telefono {
+    //Variables de instancia
     private String numero;
     private Dispositivo device;
     private Plan plan;

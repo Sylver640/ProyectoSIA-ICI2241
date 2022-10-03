@@ -5,18 +5,21 @@ import java.io.*;
 public class ManejoColecciones 
 {
     //Mapa que contiene todos los planes disponibles en el mercado
-    private HashMap <String,Plan> planesMap = new HashMap<String,Plan>();
+    private HashMap <String,Plan> planesMap;
     //Mapa que contiene cada número único que es prepago
-    private HashMap <String,Prepago> prepagoMap = new HashMap<String,Prepago>();
+    private HashMap <String,Prepago> prepagoMap;
     //Mapa que contiene los clientes
-    private HashMap <String,Cliente> clientesMap = new HashMap<String,Cliente>();
+    private HashMap <String,Cliente> clientesMap;
     //Mapa con todos los dispositivos disponibles
-    private HashMap <String,Dispositivo> celuMap = new HashMap<String,Dispositivo>();
+    private HashMap <String,Dispositivo> celuMap;
     
     //Constructor sin parámetros.
     public ManejoColecciones()
     {
-    
+        planesMap = new HashMap<String,Plan>();
+        prepagoMap = new HashMap<String,Prepago>();
+        clientesMap = new HashMap<String,Cliente>();
+        celuMap = new HashMap<String,Dispositivo>();
     }
     
     //Getter de cliente.
