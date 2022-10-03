@@ -12,16 +12,16 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
- *
- * @author vicen
+ * @author Vicente Mercado.
+ * @author Rodrigo Araos.
  */
 public class ResultadosMarca extends javax.swing.JFrame {
+    //Variables de instancia.
     JFrame ventanaPrincipal;
     ManejoColecciones colHandle;
     String marca;
-    /**
-     * Creates new form ResultadosMarca
-     */
+    
+    //Constructor
     public ResultadosMarca(JFrame padre, ManejoColecciones colHandle, String marca) {
         ventanaPrincipal = padre;
         this.colHandle = colHandle;
@@ -107,6 +107,7 @@ public class ResultadosMarca extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    //Rellena la jTable con los clientes con teléfono(s) de marca insertada por el usuario y sus datos.
     private void importTablaMarca() throws TieneDispositivoException{
         String[][] tabla = colHandle.importTablaMarca(marca);
         

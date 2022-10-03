@@ -11,12 +11,11 @@ import java.util.logging.Logger;
  * @author vicen
  */
 public class VentanaPrincipal extends javax.swing.JFrame{
-    
+    //Variables de instancia.
     ManejoColecciones colHandle;
 
-    /**
-     * Creates new form VentanaPrincipal
-     */
+    
+    //Constructor.
     public VentanaPrincipal(ManejoColecciones colHandle) {
         this.colHandle = colHandle;
         initComponents();
@@ -191,17 +190,19 @@ public class VentanaPrincipal extends javax.swing.JFrame{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    // Mostrar todos los clientes.
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Mostrar todos los clientes
+
         MostrarTodosClientes mostrar = new MostrarTodosClientes(this, colHandle);
         mostrar.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    // Salir del programa.
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            // Salir
+            
             colHandle.exportPlanes();
             colHandle.exportPrepago();
             colHandle.exportDispositivos();
@@ -213,45 +214,52 @@ public class VentanaPrincipal extends javax.swing.JFrame{
         }
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
+    // Editar contratos de teléfono de cliente.
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // Editar contratos de teléfono de cliente.
+  
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    
+    // Generar reporte actual.
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // Generar reporte actual.
+  
     }//GEN-LAST:event_jButton5ActionPerformed
-
+    
+    // Mostrar el catálogo de dispositivos.
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // Mostrar el catálogo de dispositivos
+        
         MostrarDispositivos mostrarCelus = new MostrarDispositivos(this, colHandle);
         mostrarCelus.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
-
+    
+    // Filtrar clientes por marca de dispositivo.
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // Filtrar clientes por marca de dispositivo
+        
         FiltrarMarca mostrar = new FiltrarMarca(this, colHandle);
         mostrar.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton7ActionPerformed
-
+    
+    // Buscar cliente específico.
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // Buscar cliente específico.
+        
         InsertRUT buscar = new InsertRUT(this, colHandle);
         buscar.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton8ActionPerformed
-
+    
+    // Filtrar clientes por plan.
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // Filtrar clientes por plan.
+        
         FiltrarPlan mostrar = new FiltrarPlan(this, colHandle);
         mostrar.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton9ActionPerformed
-
+    
+    // Filtrar clientes por tiempo en la compañía.
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // Filtrar clientes por tiempo en la compañía.
+       
         FiltrarTiempo mostrar = new FiltrarTiempo(this, colHandle);
         mostrar.setVisible(true);
         this.setVisible(false);

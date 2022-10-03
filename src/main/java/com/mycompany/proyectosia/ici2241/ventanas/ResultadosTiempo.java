@@ -9,16 +9,16 @@ import com.mycompany.proyectosia.ici2241.ManejoColecciones;
 import javax.swing.JFrame;
 
 /**
- *
- * @author rodri
+ * @author Vicente Mercado.
+ * @author Rodrigo Araos.
  */
 public class ResultadosTiempo extends javax.swing.JFrame {
+    //Variables de instancia.
     ManejoColecciones colHandle;
     JFrame ventanaPrincipal;
     int tiempo;
-    /**
-     * Creates new form ResultadosTiempo
-     */
+    
+    //Constructor
     public ResultadosTiempo(JFrame padre, ManejoColecciones colHandle, int tiempo){
         ventanaPrincipal = padre;
         this.colHandle = colHandle;
@@ -97,7 +97,8 @@ public class ResultadosTiempo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-     
+    
+    //Rellena la jTable con los clientes que cumplen el tiempo estipulado por el usuario y sus datos.
     private void importTablaTiempo(){
         String[][] tabla = colHandle.generarTablaTiempo(tiempo);
         

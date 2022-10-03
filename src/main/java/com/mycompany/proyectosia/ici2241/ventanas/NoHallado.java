@@ -4,20 +4,17 @@
  * and open the template in the editor.
  */
 package com.mycompany.proyectosia.ici2241.ventanas;
-import com.mycompany.proyectosia.ici2241.Cliente;
-import com.mycompany.proyectosia.ici2241.ManejoColecciones;
-import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 /**
- *
- * @author vicen
+ * @author Vicente Mercado.
+ * @author Rodrigo Araos.
  */
 public class NoHallado extends javax.swing.JFrame {
+    //Variables de instancia.
     JFrame ventanaPrincipal;
-    /**
-     * Creates new form MostrarCliente
-     */
+    
+    //Constructor.
     public NoHallado(JFrame padre) {
         ventanaPrincipal = padre;
         initComponents();

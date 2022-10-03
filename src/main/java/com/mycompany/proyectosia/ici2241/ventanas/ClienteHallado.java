@@ -15,11 +15,11 @@ import javax.swing.JFrame;
  * @author vicen
  */
 public class ClienteHallado extends javax.swing.JFrame {
+    //Variables de instancia.
     JFrame ventanaPrincipal;
     Cliente cliente;
-    /**
-     * Creates new form MostrarCliente
-     */
+    
+    //Constructor.
     public ClienteHallado(JFrame padre, Cliente hallado) {
         ventanaPrincipal = padre;
         cliente = hallado;
@@ -166,7 +166,8 @@ public class ClienteHallado extends javax.swing.JFrame {
         ventanaPrincipal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
+    //Rellena la jTable con los teléfonos del cliente y sus datos.
     public void importTelefono() throws IOException{
         String[][] t = cliente.mostrarTodosLosTelefonos();
         

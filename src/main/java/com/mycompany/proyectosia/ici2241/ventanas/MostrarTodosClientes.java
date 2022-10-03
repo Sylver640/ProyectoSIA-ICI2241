@@ -7,17 +7,15 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
- *
- * @author vicen
+ * @author Vicente Mercado.
+ * @author Rodrigo Araos.
  */
 public class MostrarTodosClientes extends javax.swing.JFrame {
-    
+    //Variables de instancia.
     JFrame ventanaPrincipal;
     ManejoColecciones colHandle;
     
-    /**
-     * Creates new form MostrarTodosClientes
-     */
+    //Constructor.
     public MostrarTodosClientes(JFrame padre, ManejoColecciones colHandle){
         initComponents();
         this.setLocationRelativeTo(null);
@@ -96,7 +94,7 @@ public class MostrarTodosClientes extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
+    //Rellena la jTable con todos los clientes existentes y sus datos.
     public void importTabla() throws IOException{
         String[][] table = colHandle.mostrarTodosLosClientes();
         

@@ -14,11 +14,11 @@ import javax.swing.JFrame;
  * @author vicen
  */
 public class InsertRUT extends javax.swing.JFrame {
+    //Variables de instancia.
     JFrame ventanaPrincipal;
     ManejoColecciones colHandle;
-    /**
-     * Creates new form MostrarCliente
-     */
+    
+    //Constructor.
     public InsertRUT(JFrame padre, ManejoColecciones colHandle) {
         ventanaPrincipal = padre;
         this.colHandle = colHandle;
@@ -131,7 +131,8 @@ public class InsertRUT extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //Busca a cliente del RUT especificado por el usuario.
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String RUT = jTextField1.getText();
         Cliente hallado = colHandle.getCliente(RUT);
@@ -149,7 +150,7 @@ public class InsertRUT extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+        // Campo de texto para que escriba el usuario.
         
     }//GEN-LAST:event_jTextField1ActionPerformed
 

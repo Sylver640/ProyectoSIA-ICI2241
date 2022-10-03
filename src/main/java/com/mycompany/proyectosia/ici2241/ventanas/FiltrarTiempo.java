@@ -12,12 +12,11 @@ import javax.swing.JFrame;
  * @author rodri
  */
 public class FiltrarTiempo extends javax.swing.JFrame {
+    //Variables de instancia.
     JFrame ventanaPrincipal;
     ManejoColecciones colHandle;
 
-    /**
-     * Creates new form FiltrarTiempo
-     */
+    //Constructor.
     public FiltrarTiempo(JFrame padre, ManejoColecciones colHandle) {
         initComponents();
         ventanaPrincipal = padre;

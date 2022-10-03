@@ -12,11 +12,11 @@ import javax.swing.JFrame;
  * @author vicen
  */
 public class FiltrarPlan extends javax.swing.JFrame {
+    //Variables de instancia.
     JFrame ventanaPrincipal;
     ManejoColecciones colHandle;
-    /**
-     * Creates new form FiltrarMarca
-     */
+    
+    //Constructor.
     public FiltrarPlan(JFrame padre, ManejoColecciones colHandle) {
         ventanaPrincipal = padre;
         this.colHandle = colHandle;
@@ -112,23 +112,26 @@ public class FiltrarPlan extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //Campo de texto.
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+
 
     }//GEN-LAST:event_jTextField1ActionPerformed
-
+    
+    //Al presionar el botón Buscar, inicia proceso de filtración de clientes por plan indicado.
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //Buscar
+
         String plan = jTextField1.getText();
         ResultadosPlan res = new ResultadosPlan(ventanaPrincipal, colHandle, plan);
         res.setVisible(true);
 
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    // Regresa al menú principal.
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // Volver al menú principal.
+
         ventanaPrincipal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed

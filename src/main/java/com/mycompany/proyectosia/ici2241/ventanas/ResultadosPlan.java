@@ -12,16 +12,16 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
- *
- * @author vicen
+ * @author Vicente Mercado.
+ * @author Rodrigo Araos.
  */
 public class ResultadosPlan extends javax.swing.JFrame {
+    //Variables de instancia.
     JFrame ventanaPrincipal;
     ManejoColecciones colHandle;
     String plan;
-    /**
-     * Creates new form ResultadosMarca
-     */
+    
+    //Constructor.
     public ResultadosPlan(JFrame padre, ManejoColecciones colHandle, String plan) {
         ventanaPrincipal = padre;
         this.colHandle = colHandle;
@@ -107,6 +107,7 @@ public class ResultadosPlan extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    //Rellena la jTable con los clientes con teléfono(s) que posee(n) el plan insertado por el usuario y sus datos.
     private void importTablaPlan() throws NotTarifaException{
         String[][] tabla = colHandle.importTablaPlan(plan);
         

@@ -12,11 +12,11 @@ import javax.swing.JFrame;
  * @author vicen
  */
 public class FiltrarMarca extends javax.swing.JFrame {
+    //Variables de instancia.
     JFrame ventanaPrincipal;
     ManejoColecciones colHandle;
-    /**
-     * Creates new form FiltrarMarca
-     */
+    
+    //Constructor.
     public FiltrarMarca(JFrame padre, ManejoColecciones colHandle) {
         ventanaPrincipal = padre;
         this.colHandle = colHandle;
@@ -114,16 +114,17 @@ public class FiltrarMarca extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // Espacio para que escriba el usuario
+        // Espacio para que escriba el usuario.
     }//GEN-LAST:event_jTextField1ActionPerformed
-
+    
+    //Busca los clientes con teléfonos de marca indicado por el usuario.
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String marca = jTextField1.getText();
         ResultadosMarca res = new ResultadosMarca(ventanaPrincipal, colHandle, marca);
         res.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // Volver al menú principal.
         ventanaPrincipal.setVisible(true);

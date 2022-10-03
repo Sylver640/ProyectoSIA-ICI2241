@@ -394,11 +394,7 @@ public class ManejoColecciones
             return;
         }
     }
-    
-<<<<<<< Updated upstream
-=======
     //Se crea un nuevo prepago con parámetros insertados por el usuario.
->>>>>>> Stashed changes
     public Prepago agregarNuevoPrepago(String telefono) throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Ingrese el saldo del teléfono:");
@@ -652,8 +648,7 @@ public class ManejoColecciones
         
         return t;
     }
-    
-<<<<<<< Updated upstream
+   
     public void mostrarClientesPlanes() throws IOException, NotTarifaException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int contTotal = 0;
@@ -745,8 +740,6 @@ public class ManejoColecciones
         }
     }
     
-=======
->>>>>>> Stashed changes
     public void generarReporte(){
         
     }

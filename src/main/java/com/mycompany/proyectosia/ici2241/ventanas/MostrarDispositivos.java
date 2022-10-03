@@ -6,16 +6,15 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
- *
- * @author rodri
+ * @author Vicente Mercado.
+ * @author Rodrigo Araos.
  */
 public class MostrarDispositivos extends javax.swing.JFrame {
+    //Variables de instancia.
     JFrame ventanaPrincipal;
     ManejoColecciones colHandle;
     
-    /**
-     * Creates new form mostrarDispositivos
-     */
+    //Constructor.
     public MostrarDispositivos(JFrame padre, ManejoColecciones colHandle) {
         ventanaPrincipal = padre;
         this.colHandle = colHandle;
@@ -100,6 +99,7 @@ public class MostrarDispositivos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    //Rellena la jTable con los dispositivos y sus datos.
     public void importTabla() throws IOException{
         String [][] tabla = colHandle.mostrarDispositivos();
         
