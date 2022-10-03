@@ -394,6 +394,7 @@ public class ManejoColecciones
             return;
         }
     }
+
     //Se crea un nuevo prepago con parámetros insertados por el usuario.
     public Prepago agregarNuevoPrepago(String telefono) throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

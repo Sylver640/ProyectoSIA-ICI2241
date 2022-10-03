@@ -11,19 +11,41 @@ public class JavaMain
     public static void main(String[] args) throws IOException, NotTarifaException, TieneDispositivoException
     {
         //Variables de lectura
-        //BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-        //String ingresado;
-        //int opt = 1;
+        BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
+        String ingresado;
+        int opt = 1;
         ManejoColecciones colHandle = new ManejoColecciones(); //Instancia de ManejoColecciones.
         colHandle.importPlanes(); //Importación de planes.
         colHandle.importPrepago(); //Importación de prepagos.
         colHandle.importDispositivos(); //Importación de dispositivos.
         colHandle.importClientes(); //Importación de clientes.
         
-        VentanaPrincipal vp = new VentanaPrincipal(colHandle);
-        vp.setVisible(true); //Se crea y visibiliza la ventana del menú principal. 
+        //Puesto que algunas funciones no alcanzaron a ser implementadas en ventanas,
+        //se le da al usuario la opción de utilizarlas en la forma de consola
+        System.out.println("Desea usar las funciones disponibles en consola? (s/n)");
+        ingresado = lector.readLine();
         
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        if (ingresado.equals("s")){
+            while (opt != 0){
+                System.out.println("(1) Administrar contratos");
+                System.out.println("(0) Salir");
+                System.out.println("Ingrese una opción:");
+                opt = Integer.parseInt(lector.readLine());
+                
+                switch (opt){
+                    case 1: colHandle.administrarContratos();
+                            break;
+                    case 0: colHandle.exportPrepago();
+                            colHandle.exportPlanes();
+                            colHandle.exportDispositivos();
+                            colHandle.exportClientes();
+                            return;
+                }
+            }
+        } else{ //Si no lo quiere así, solo se abre la ventana principal
+            VentanaPrincipal vp = new VentanaPrincipal(colHandle);
+            vp.setVisible(true); //Se crea y visibiliza la ventana del menú principal. 
+            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
@@ -52,5 +74,7 @@ public class JavaMain
             java.util.logging.Logger.getLogger(InsertRUT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        }
+        
     }
 }
